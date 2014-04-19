@@ -6,6 +6,8 @@ public class UI : MonoBehaviour {
 	public Texture2D Generator;
 	public Texture2D Dig;
 
+	private GameObject clicked;
+
 	void OnGUI() {
 		if(Input.GetJoystickNames().Length == 0) {
 			if(GUI.Button(new Rect(10, 10, 100, 100), Building)) {
@@ -18,6 +20,7 @@ public class UI : MonoBehaviour {
 			}
 		}
 	}
+
 	void Update() {
 		if(Input.GetButtonDown("A")) {
 		}
@@ -30,6 +33,11 @@ public class UI : MonoBehaviour {
 		if(Input.GetKeyDown("mouse 0")) {
 			RaycastHit hit;
 			if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)) {
+				if(clicked != null) {
+					clicked.GetComponent<Tile>().highlighted = false;
+				}
+				clicked = hit.collider.gameObject;
+				clicked.GetComponent<Tile>().highlighted = true;
 			}
 		}
 	}

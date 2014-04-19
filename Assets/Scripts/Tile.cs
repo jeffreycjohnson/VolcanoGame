@@ -19,6 +19,23 @@ public class Tile : MonoBehaviour
     }
   }
 
+	private Color oldColor = Color.red;
+	private bool _highlighted = false;
+	public bool highlighted
+	{
+		get { return _highlighted; }
+		set{
+			if(_highlighted != value)
+			{
+				_highlighted = value;
+
+				Color tmp = transform.FindChild("Rock").renderer.material.color;
+				transform.FindChild("Rock").renderer.material.color = oldColor;
+				oldColor = tmp;
+			}
+		}
+	}
+
   // Use this for initialization
   void Start()
   {
@@ -28,7 +45,6 @@ public class Tile : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
   }
 
   public void AddLava()
