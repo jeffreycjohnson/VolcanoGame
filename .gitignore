@@ -16,3 +16,5 @@ ProjectSettings/NetworkManager.asset
 ProjectSettings/ProjectSettings.asset
 ProjectSettings/QualitySettings.asset
 *.userprefs
+Assets/Standard Assets/*
+Assets/Standard assets.meta
