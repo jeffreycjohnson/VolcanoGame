@@ -4,8 +4,8 @@ using System.Collections;
 public class Level : MonoBehaviour {
 
     public GameObject TileTemplate;
-    public int Width = 20;
-    public int Height = 12;
+    public int Width = 25;
+    public int Height = 15;
     public float volcanoheight = 25;
     public float volcanoradius = 14;
     public float volcanotopradius = 5;
@@ -40,23 +40,23 @@ public class Level : MonoBehaviour {
             for (int x = 0; x < Width; x++)
             {
                 GameObject tile = (GameObject)Instantiate(TileTemplate);
+                tile.GetComponent<Tile>().InitializeLevelData(x, y, gameObject);
                 tile.gameObject.transform.parent = gameObject.transform;
+                _tiles[x][y] = tile;
+
                 float theta = (Mathf.PI * 2f / (float)Width) * x;
                 tile.transform.position = new Vector3(Mathf.Cos(theta) * radius, tiley, Mathf.Sin(theta) * radius);
                 tile.transform.localScale *= scalar;
-                //tile.transform.position += new Vector3(0, tiley, 0);
-                //tile.GetComponent<Tile>().InitializeLevelData(x, y, gameObject);
                 tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 0, 1)),
-                    -RadiansToDegrees(Mathf.Tan(volcanoheight) * (volcanoradius - volcanotopradius)), Space.Self);
+                    RadiansToDegrees(Mathf.Tan(volcanoheight) * (volcanoradius - volcanotopradius)), Space.Self);
                 tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 1, 0)),
                     RadiansToDegrees(theta), Space.World);
-                _tiles[x][y] = tile;
             }
             //tiley += (volcanoheight / Height) * scalar * 0.42f;
-            scalar *= 0.75f; // squishes them together
+            scalar *= 1.01f; // squishes them together
             tiley += (volcanoheight / Height) * scalar / 2;
             //radius = (volcanoradius - tiley * (volcanoradius / volcanoheight)) * 1.1f;
-            radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.56f);
+            radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.47f);
         }
 	}
 

@@ -239,7 +239,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
       propertyPath: Height
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
       propertyPath: volcanoheight
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afb7a853befc344793cfa72093a5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: {fileID: 1242254783}
+  level: {fileID: 0}
 --- !u!1 &1242254781
 GameObject:
   m_ObjectHideFlags: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileTemplate: {fileID: 100006, guid: b5fbe0a1775b48f4cb8da0f1c85c7866, type: 2}
   Width: 25
-  Height: 12
+  Height: 15
   volcanoheight: 25
   volcanoradius: 14
   volcanotopradius: 5
