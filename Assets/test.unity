@@ -233,18 +233,6 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
-      propertyPath: Width
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
-      propertyPath: Height
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
-      propertyPath: volcanoheight
-      value: 25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
   m_RootGameObject: {fileID: 1242254781}
@@ -328,7 +316,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 738146373}
   m_LocalRotation: {x: .21643962, y: 0, z: 0, w: .976296008}
-  m_LocalPosition: {x: 0, y: 32.5299988, z: -43.1023026}
+  m_LocalPosition: {x: 0, y: 38.0752373, z: -52.4869614}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -343,10 +331,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac535c04cf9b67343b6ed4db36b34037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Building: {fileID: 2800000, guid: 98f0a0f33af7b0a45affbb6b4772f504, type: 3}
-  Wall: {fileID: 2800000, guid: 98f0a0f33af7b0a45affbb6b4772f504, type: 3}
-  Generator: {fileID: 2800000, guid: 98f0a0f33af7b0a45affbb6b4772f504, type: 3}
-  Dig: {fileID: 2800000, guid: 98f0a0f33af7b0a45affbb6b4772f504, type: 3}
+  Building: {fileID: 2800000, guid: 3117b395e93b9f744b9d1c6bdf0bba9a, type: 3}
+  Wall: {fileID: 2800000, guid: 79c254d862cf7aa44b7de3f64e416b5f, type: 3}
+  Generator: {fileID: 2800000, guid: 77729f86eea67c4429856fefd2186608, type: 3}
+  Dig: {fileID: 2800000, guid: ba38a2fb8ffab894fb6cd33cc4b5d8d1, type: 3}
 --- !u!114 &738146380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1afb7a853befc344793cfa72093a5466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: {fileID: 0}
+  level: {fileID: 1242254783}
 --- !u!1 &1242254781
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +379,7 @@ MonoBehaviour:
   Width: 25
   Height: 15
   volcanoheight: 25
-  volcanoradius: 14
+  volcanoradius: 20
   volcanotopradius: 5
 --- !u!4 &1242254783
 Transform:

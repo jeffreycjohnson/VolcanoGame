@@ -39,10 +39,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileTemplate: {fileID: 100006, guid: b5fbe0a1775b48f4cb8da0f1c85c7866, type: 2}
-  Width: 20
-  Height: 12
+  Width: 25
+  Height: 15
   volcanoheight: 25
-  volcanoradius: 14
+  volcanoradius: 20
   volcanotopradius: 5
 --- !u!1001 &100100000
 Prefab:
