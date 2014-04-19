@@ -11,7 +11,6 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -29,6 +28,7 @@ GameObject:
   - 4: {fileID: 400002}
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
+  - 114: {fileID: 11400006}
   m_Layer: 0
   m_Name: Structure
   m_TagString: Untagged
@@ -88,9 +88,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: -.707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children: []
   m_Father: {fileID: 400006}
 --- !u!4 &400004
@@ -130,7 +130,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 798c9c124eb46db449d17b47bae8c23d, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -145,13 +145,13 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: f66bd58f708001e4abcd03cf2bf039d1, type: 2}
+  - {fileID: 2100000, guid: 1adfabffbfb9fec43856f2a3bc79cb09, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -187,14 +187,14 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &3300002
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 4300000, guid: a9554e8bd4a408f478c804525df54513, type: 3}
 --- !u!33 &3300004
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -257,12 +257,18 @@ MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
+  m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd37287fd3414764d90351ba6876a494, type: 3}
+  m_Script: {fileID: 11500000, guid: e82478de8b8a2a246ad3ccfafbe995f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingModel: {fileID: 4300000, guid: a9554e8bd4a408f478c804525df54513, type: 3}
+  buildingMaterial: {fileID: 2100000, guid: 1adfabffbfb9fec43856f2a3bc79cb09, type: 2}
+  generatorModel: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  generatorMaterial: {fileID: 2100000, guid: f66bd58f708001e4abcd03cf2bf039d1, type: 2}
+  wallModel: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  wallMaterial: {fileID: 2100000, guid: f66bd58f708001e4abcd03cf2bf039d1, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -336,6 +336,7 @@ MonoBehaviour:
   Wall: {fileID: 2800000, guid: 79c254d862cf7aa44b7de3f64e416b5f, type: 3}
   Generator: {fileID: 2800000, guid: 77729f86eea67c4429856fefd2186608, type: 3}
   Dig: {fileID: 2800000, guid: ba38a2fb8ffab894fb6cd33cc4b5d8d1, type: 3}
+  level: {fileID: 1242254783}
 --- !u!114 &738146380
 MonoBehaviour:
   m_ObjectHideFlags: 0
