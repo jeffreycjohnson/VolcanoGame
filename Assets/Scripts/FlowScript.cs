@@ -61,11 +61,18 @@ public class FlowScript : MonoBehaviour
   {
     FillLevel = Math.Min(MaxFillLevel, FillLevel + FillRate);
 
+    Render();
+
     Debug.Log(string.Format("Increased Fill Level to {0}", FillLevel));
   }
 
   public void RegisterFlowCallback(Action callback)
   {
     _flowCallback = callback;
+  }
+
+  private void Render()
+  {
+    
   }
 }
