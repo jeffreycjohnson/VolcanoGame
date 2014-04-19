@@ -51,6 +51,7 @@ public class FlowScript : MonoBehaviour
   public void Flow()
   {
     if (!IsFlowing) return;
+    return; // REMOVE ME!!
 
     FillUp();
 
