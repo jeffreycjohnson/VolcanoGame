@@ -42,17 +42,23 @@ public class Level : MonoBehaviour {
                 //tile.transform.RotateAround(gameObject.transform.position - (gameObject.transform.position + new Vector3(0, 1, 0)), theta);
                 //tile.transform.position += new Vector3(0, tiley, 0);
                 //tile.GetComponent<Tile>().InitializeLevelData(x, y, gameObject);
-                tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(1, 0, 0)), volcanoheight / (volcanoradius - volcanotopradius) * 360, Space.Self);
-                tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 1, 0)), theta * 360 / (Mathf.PI * 2), Space.Self);
+                //RadiansToDegrees(Mathf.Tan(volcanoheight) * (volcanoradius - volcanotopradius))
+                tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 0, 1)), RadiansToDegrees(Mathf.Tan(volcanoheight) * (volcanoradius - volcanotopradius)), Space.Self);
+                //tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 1, 0)), RadiansToDegrees(theta), Space.Self);
                 _tiles[x][y] = tile;
             }
         }
 	}
-	
+
 	void Update ()
     {
 	
 	}
+
+    float RadiansToDegrees(float rad)
+    {
+        return rad / (Mathf.PI * 2f) * 360;
+    }
 
     public GameObject GetTile(int x, int y)
     {
