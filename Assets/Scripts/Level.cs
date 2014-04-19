@@ -28,13 +28,6 @@ public class Level : MonoBehaviour {
         // slices of the cone
         for (int y = 0; y < Height; y++)
         {
-            //float tiley = ((float)y * (volcanoheight / Height));
-            
-            //float radius = volcanoradius - ((volcanoradius - volcanotopradius) / Height) * y;
-            
-            
-            //float scalar = 1 + 1.7f * (Height - y) / Height;
-            //float scalar = 2 * radius * Mathf.Tan(Mathf.PI / (float)Width) * 1.28f;
             float scalar = 2 * radius * Mathf.Tan(Mathf.PI / (float)Width) * 1.2f;
             // create each tile of the slice
             for (int x = 0; x < Width; x++)
@@ -52,13 +45,25 @@ public class Level : MonoBehaviour {
                 tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 1, 0)),
                     RadiansToDegrees(theta), Space.World);
             }
-            //tiley += (volcanoheight / Height) * scalar * 0.42f;
             scalar *= 1.01f; // squishes them together
             tiley += (volcanoheight / Height) * scalar / 2;
-            //radius = (volcanoradius - tiley * (volcanoradius / volcanoheight)) * 1.1f;
             radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.47f);
         }
+
+        StartCoroutine(RandomizeGround());
 	}
+
+    IEnumerator RandomizeGround()
+    {
+        yield return new WaitForFixedUpdate();
+        for (int i = 0; i < Width; i++)
+        {
+            for (int j = 0; j < Height; j++)
+            {
+                _tiles[i][j].GetComponent<Tile>().SetGroundHeight((int)(Random.value * 4));
+            }
+        }
+    }
 
 	void Update ()
     {

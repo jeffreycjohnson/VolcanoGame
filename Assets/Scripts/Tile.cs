@@ -64,6 +64,11 @@ public class Tile : MonoBehaviour
     }
   }
 
+  public void SetGroundHeight(int h)
+  {
+      transform.FindChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height = h;
+  }
+
   /// <summary>
   /// How often the tiles update (in Fixed Updates)
   /// </summary>
@@ -202,7 +207,7 @@ public class Tile : MonoBehaviour
   internal static class ChildNames
   {
     public const string Lava = "Lava";
-    public const string Ground = "Ground";
+    public const string Ground = "Rock";
     public const string Structure = "Structure";
   }
 }
