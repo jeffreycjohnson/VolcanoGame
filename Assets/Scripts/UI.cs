@@ -14,13 +14,13 @@ public class UI : MonoBehaviour {
 			if(GUI.Button(new Rect(10, 10, 100, 100), Building)) {
 				clicked.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
 			}
-			if(GUI.Button(new Rect(120, 10, 100, 100), Wall)) {
+			if(GUI.Button(new Rect(10, 120, 100, 100), Wall)) {
 				clicked.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
 			}
-			if(GUI.Button(new Rect(230, 10, 100, 100), Generator)) {
+			if(GUI.Button(new Rect(10, 230, 100, 100), Generator)) {
 				clicked.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
 			}
-			if(GUI.Button(new Rect(340, 10, 100, 100), Dig)) {
+			if(GUI.Button(new Rect(10, 340, 100, 100), Dig)) {
 			}
 		}
 		GUI.Label(new Rect(Screen.width - 75, 25, 50, 50), ((int)State.money).ToString());
