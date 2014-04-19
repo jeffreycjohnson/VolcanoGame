@@ -15,6 +15,11 @@ public class FlowScript : MonoBehaviour
   /// </summary>
   public float FillRate = 1;
 
+  /// <summary>
+  /// Is the lava flowing at all?
+  /// </summary>
+  public bool Flowing = false;
+
   // Use this for initialization
   void Start()
   {

@@ -33,7 +33,12 @@ public class Tile : MonoBehaviour
 
   public void AddLava()
   {
-    
+    Transform lavaTransform = this.gameObject.transform.FindChild("Lava");
+    GameObject lava = null;
+
+    if (lavaTransform == null) return;
+
+    lava = lavaTransform.gameObject;
   }
 
   public void RemoveLava()
