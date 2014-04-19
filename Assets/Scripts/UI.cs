@@ -40,5 +40,18 @@ public class UI : MonoBehaviour {
 				clicked.GetComponent<Tile>().highlighted = true;
 			}
 		}
+		for(int i = 0; i < Input.touchCount; i++) {
+			Touch touch = Input.GetTouch(i);
+			if(touch.phase == TouchPhase.Began) {
+				RaycastHit hit;
+				if(Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out hit)) {
+					if(clicked != null) {
+						clicked.GetComponent<Tile>().highlighted = false;
+					}
+					clicked = hit.collider.gameObject;
+					clicked.GetComponent<Tile>().highlighted = true;
+				}
+			}
+		}
 	}
 }
