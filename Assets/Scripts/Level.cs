@@ -9,7 +9,7 @@ public class Level : MonoBehaviour {
     public float volcanoheight = 25;
     public float volcanoradius = 14;
     public float volcanotopradius = 5;
-    GameObject[][] _tiles;
+    public GameObject[][] _tiles;
 
     public static int LevelWidth;
     public static int LevelHeight;
