@@ -4,6 +4,10 @@ using System.Collections;
 
 public class FlowScript : MonoBehaviour
 {
+  private Action _flowCallback;
+
+  public const float MaxFillLevel = 5.0f;
+
   /// <summary>
   /// The initial fill level
   /// Goes from 0-10
@@ -11,34 +15,57 @@ public class FlowScript : MonoBehaviour
   public float FillLevel = 0;
 
   /// <summary>
-  /// How much the fill increases per second
+  /// How much the fill increases per tick
+  /// A tick is 0.2f as of 2014.04.18
   /// </summary>
-  public float FillRate = 1;
-
+  public float FillRate = 1f;
+  
   /// <summary>
   /// Is the lava flowing at all?
   /// </summary>
-  public bool Flowing = false;
+  public bool IsFlowing = false;
+
+  public int TickRate = 1;
+  private int _currentTick = 0;
 
   // Use this for initialization
   void Start()
   {
-    InvokeRepeating("FillUp", 0, 1.0f);
   }
 
   // Update is called once per frame
   void Update()
   {
-
   }
 
+  void FixedUpdate()
+  {
+    _currentTick++;
+
+    if (_currentTick >= TickRate)
+    {
+      _currentTick = 0;
+
+      Flow();
+    }
+  }
+  
   public void Flow()
   {
-    
+    if (!IsFlowing) return;
+
+    FillUp();
+
+    if (FillLevel > MaxFillLevel) _flowCallback();
   }
 
   public void FillUp()
   {
-    FillLevel = Math.Min(10, FillLevel + FillRate);
+    FillLevel = Math.Min(MaxFillLevel, FillLevel + FillRate);
+  }
+
+  public void RegisterFlowCallback(Action callback)
+  {
+    _flowCallback = callback;
   }
 }
