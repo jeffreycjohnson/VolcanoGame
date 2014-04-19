@@ -70,6 +70,24 @@ public class Tile : MonoBehaviour
   public int TickRate = 1;
   private int _currentTick = 0;
 
+  private Color oldColor = Color.red;
+  private bool _highlighted = false;
+  public bool highlighted
+  {
+    get { return _highlighted; }
+    set
+    {
+      if (_highlighted != value)
+      {
+        _highlighted = value;
+
+        Color tmp = transform.FindChild("Rock").renderer.material.color;
+        transform.FindChild("Rock").renderer.material.color = oldColor;
+        oldColor = tmp;
+      }
+    }
+  }
+
   // Use this for initialization
   void Start()
   {
@@ -94,12 +112,11 @@ public class Tile : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-
   }
 
   void FixedUpdate()
   {
-    _currentTick ++;
+    _currentTick++;
 
     if (_currentTick >= TickRate)
     {
@@ -134,7 +151,7 @@ public class Tile : MonoBehaviour
   {
     Level level = _level.GetComponent<Level>();
     if (level == null) return;
-    
+
     int downY = _y - 1;
     if (!withinBounds(downY, 0, level.Height)) return;
 
@@ -142,10 +159,10 @@ public class Tile : MonoBehaviour
     if (downTile == null) return;
 
     if (!downTile.HasLava) Debug.Log(string.Format("Made lava at {0}, {1}", downTile._x, downTile._y));
-    
+
     downTile.HasLava = true;
   }
-  
+
   private GameObject EnableChildObject(string objectName)
   {
     GameObject gobj = getChild(objectName);
@@ -170,7 +187,7 @@ public class Tile : MonoBehaviour
 
     return gobj;
   }
-  
+
   private GameObject getChild(string childName)
   {
     Transform transform = this.gameObject.transform.FindChild(childName);
@@ -181,7 +198,7 @@ public class Tile : MonoBehaviour
   {
     return val >= low && val <= high;
   }
-  
+
   internal static class ChildNames
   {
     public const string Lava = "Lava";
