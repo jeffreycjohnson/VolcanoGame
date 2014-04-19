@@ -53,10 +53,10 @@ public class Level : MonoBehaviour {
                 _tiles[x][y] = tile;
             }
             //tiley += (volcanoheight / Height) * scalar * 0.42f;
-            scalar *= 0.8f;
+            scalar *= 0.75f; // squishes them together
             tiley += (volcanoheight / Height) * scalar / 2;
             //radius = (volcanoradius - tiley * (volcanoradius / volcanoheight)) * 1.1f;
-            radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.675f);
+            radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.56f);
         }
 	}
 

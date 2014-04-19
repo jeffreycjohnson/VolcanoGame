@@ -233,6 +233,18 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
+      propertyPath: Width
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
+      propertyPath: Height
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
+      propertyPath: volcanoheight
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c126b354cc96a4a40a7f227ad8e2d30f, type: 2}
   m_RootGameObject: {fileID: 1242254781}
@@ -315,8 +327,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 738146373}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 14.0739727, z: -50.348175}
+  m_LocalRotation: {x: .21643962, y: 0, z: 0, w: .976296008}
+  m_LocalPosition: {x: 0, y: 32.5299988, z: -43.1023026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -376,7 +388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileTemplate: {fileID: 100006, guid: b5fbe0a1775b48f4cb8da0f1c85c7866, type: 2}
-  Width: 20
+  Width: 25
   Height: 12
   volcanoheight: 25
   volcanoradius: 14
