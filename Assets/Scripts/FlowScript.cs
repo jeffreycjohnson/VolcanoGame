@@ -4,7 +4,7 @@ using System.Collections;
 
 public class FlowScript : MonoBehaviour
 {
-  private Action _flowCallback;
+  private Action _flowCallback = () => Debug.Log("DEFAULT ACTION ACTION");
 
   public const float MaxFillLevel = 5.0f;
 
@@ -19,13 +19,13 @@ public class FlowScript : MonoBehaviour
   /// A tick is 0.2f as of 2014.04.18
   /// </summary>
   public float FillRate = 1f;
-  
+
   /// <summary>
   /// Is the lava flowing at all?
   /// </summary>
   public bool IsFlowing = false;
 
-  public int TickRate = 1;
+  public int TickRate = 50;
   private int _currentTick = 0;
 
   // Use this for initialization
@@ -42,10 +42,8 @@ public class FlowScript : MonoBehaviour
   {
     _currentTick++;
 
-    if (_currentTick >= TickRate)
+    if (_currentTick % TickRate == 0)
     {
-      _currentTick = 0;
-
       Flow();
     }
   }
@@ -56,12 +54,14 @@ public class FlowScript : MonoBehaviour
 
     FillUp();
 
-    if (FillLevel > MaxFillLevel) _flowCallback();
+    if (FillLevel >= MaxFillLevel) _flowCallback();
   }
 
   public void FillUp()
   {
     FillLevel = Math.Min(MaxFillLevel, FillLevel + FillRate);
+
+    Debug.Log(string.Format("Increased Fill Level to {0}", FillLevel));
   }
 
   public void RegisterFlowCallback(Action callback)

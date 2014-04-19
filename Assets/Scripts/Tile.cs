@@ -20,11 +20,13 @@ public class Tile : MonoBehaviour
         {
           var lava = EnableChildObject(ChildNames.Lava);
           lava.GetComponent<FlowScript>().IsFlowing = true;
+
+          Debug.Log(string.Format("Set To Flowing {0}", lava.GetComponent<FlowScript>().IsFlowing));
         }
         else
         {
           var lava = DisableChildObject(ChildNames.Lava);
-          lava.GetComponent<FlowScript>().IsFlowing = true;
+          lava.GetComponent<FlowScript>().IsFlowing = false;
         }
       }
     }
@@ -72,8 +74,8 @@ public class Tile : MonoBehaviour
   void Start()
   {
     // we initially want lava hidden
-    var lava = DisableChildObject(ChildNames.Lava);
-    lava.GetComponent<FlowScript>().IsFlowing = false;
+    DisableChildObject(ChildNames.Lava);
+    // lava.GetComponent<FlowScript>().IsFlowing = false;
 
     // set up the callback
     RegisterFlowCallback();
@@ -130,15 +132,18 @@ public class Tile : MonoBehaviour
 
   public void OnFlow()
   {
-    /// TODO: PUT IN ACTUAL LEVEL BOUNDS
-
-    int downY = _y - 1;
-
-    if (!withinBounds(downY, 0, 100)) return;
-
-    var level = _level.GetComponent<Level>();
-
+    Level level = _level.GetComponent<Level>();
     if (level == null) return;
+    
+    int downY = _y - 1;
+    if (!withinBounds(downY, 0, level.Height)) return;
+
+    Tile downTile = level.GetTile(_x, downY).GetComponent<Tile>();
+    if (downTile == null) return;
+
+    if (!downTile.HasLava) Debug.Log(string.Format("Made lava at {0}, {1}", downTile._x, downTile._y));
+    
+    downTile.HasLava = true;
   }
   
   private GameObject EnableChildObject(string objectName)
@@ -147,6 +152,7 @@ public class Tile : MonoBehaviour
 
     if (gobj != null)
     {
+      Debug.Log(string.Format("Enabled {0}", objectName));
       gobj.renderer.enabled = true;
     }
 
