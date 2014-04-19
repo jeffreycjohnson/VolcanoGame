@@ -6,6 +6,8 @@ public class Tile : MonoBehaviour
   private int _x, _y;
   private GameObject _level;
 
+  private bool _dripped;
+
   private bool _hasLava;
   public bool HasLava
   {
@@ -149,6 +151,8 @@ public class Tile : MonoBehaviour
 
   public void OnFlow()
   {
+    if (_dripped) return;
+
     Level level = _level.GetComponent<Level>();
     if (level == null) return;
 
@@ -156,11 +160,38 @@ public class Tile : MonoBehaviour
     if (!withinBounds(downY, 0, level.Height)) return;
 
     Tile downTile = level.GetTile(_x, downY).GetComponent<Tile>();
-    if (downTile == null) return;
+    if (downTile != null)
+    {
+      Debug.Log(string.Format("Made lava at {0}, {1}", downTile._x, downTile._y));
 
-    if (!downTile.HasLava) Debug.Log(string.Format("Made lava at {0}, {1}", downTile._x, downTile._y));
+      downTile.HasLava = true;
+    }
 
-    downTile.HasLava = true;
+    _dripped = true;
+
+    // 10% chance of branching out
+    if (Random.Range(0f, 1f) < 0.1f)
+    {
+      int leftX = (_x - 1)%level.Width;
+      int rightX = (_x + 1)%level.Height;
+
+      Tile downLeftTile = level.GetTile(leftX, downY).GetComponent<Tile>();
+      Tile downRightTile = level.GetTile(rightX, downY).GetComponent<Tile>();
+
+      if (downLeftTile != null)
+      {
+        Debug.Log(string.Format("Made lava at {0}, {1}", downLeftTile._x, downLeftTile._y));
+
+        downLeftTile.HasLava = true;
+      }
+
+      if (downRightTile != null)
+      {
+        Debug.Log(string.Format("Made lava at {0}, {1}", downRightTile._x, downRightTile._y));
+
+        downRightTile.HasLava = true;
+      }
+    }
   }
 
   private GameObject EnableChildObject(string objectName)
