@@ -23,13 +23,19 @@ public class Level : MonoBehaviour {
         {
             _tiles[x] = new GameObject[Height];
         }
-
+        float tiley = 0;
+        float radius = volcanoradius;
         // slices of the cone
         for (int y = 0; y < Height; y++)
         {
-            float tiley = ((float)y * (volcanoheight / Height));
-            float radius = volcanoradius - ((volcanoradius - volcanotopradius) / Height) * y;
-            float scalar = 1 + 1.4f * (Height - y) / Height;
+            //float tiley = ((float)y * (volcanoheight / Height));
+            
+            //float radius = volcanoradius - ((volcanoradius - volcanotopradius) / Height) * y;
+            
+            
+            //float scalar = 1 + 1.7f * (Height - y) / Height;
+            //float scalar = 2 * radius * Mathf.Tan(Mathf.PI / (float)Width) * 1.28f;
+            float scalar = 2 * radius * Mathf.Tan(Mathf.PI / (float)Width) * 1.2f;
             // create each tile of the slice
             for (int x = 0; x < Width; x++)
             {
@@ -37,16 +43,20 @@ public class Level : MonoBehaviour {
                 tile.gameObject.transform.parent = gameObject.transform;
                 float theta = (Mathf.PI * 2f / (float)Width) * x;
                 tile.transform.position = new Vector3(Mathf.Cos(theta) * radius, tiley, Mathf.Sin(theta) * radius);
-                tile.transform.localScale *= 1.75f;
                 tile.transform.localScale *= scalar;
-                //tile.transform.RotateAround(gameObject.transform.position - (gameObject.transform.position + new Vector3(0, 1, 0)), theta);
                 //tile.transform.position += new Vector3(0, tiley, 0);
                 //tile.GetComponent<Tile>().InitializeLevelData(x, y, gameObject);
-                //RadiansToDegrees(Mathf.Tan(volcanoheight) * (volcanoradius - volcanotopradius))
-                tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 0, 1)), RadiansToDegrees(Mathf.Tan(volcanoheight) * (volcanoradius - volcanotopradius)), Space.Self);
-                //tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 1, 0)), RadiansToDegrees(theta), Space.Self);
+                tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 0, 1)),
+                    -RadiansToDegrees(Mathf.Tan(volcanoheight) * (volcanoradius - volcanotopradius)), Space.Self);
+                tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 1, 0)),
+                    RadiansToDegrees(theta), Space.World);
                 _tiles[x][y] = tile;
             }
+            //tiley += (volcanoheight / Height) * scalar * 0.42f;
+            scalar *= 0.8f;
+            tiley += (volcanoheight / Height) * scalar / 2;
+            //radius = (volcanoradius - tiley * (volcanoradius / volcanoheight)) * 1.1f;
+            radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.675f);
         }
 	}
 
