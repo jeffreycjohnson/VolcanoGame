@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acac9c80a8cc7f74e80ef1d39b4fb6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TickRate: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -236,7 +237,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FillLevel: 0
   FillRate: 1
-  Flowing: 0
+  IsFlowing: 0
+  TickRate: 50
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
