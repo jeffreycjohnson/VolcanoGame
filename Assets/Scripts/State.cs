@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class State {
-	public static int money = 0;
+	public static float money = 100;
 	public enum Action {
 		Dig = 0,
 		Building = 1,
