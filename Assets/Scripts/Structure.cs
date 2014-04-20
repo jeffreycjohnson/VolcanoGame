@@ -16,6 +16,8 @@ public class Structure : MonoBehaviour {
 	public Transform fire;
 	public Transform explosion;
 
+	private bool dying = false;
+
 	enum Type {
 		None,
 		Building,
@@ -26,7 +28,7 @@ public class Structure : MonoBehaviour {
 	Type type = Type.None; 
 
 	void Update () {
-		if(transform.parent.GetComponent<Tile>().HasLava) {
+		if(transform.parent.GetComponent<Tile>().HasLava && !dying) {
 			StartCoroutine("die");
 		}
 
@@ -62,11 +64,13 @@ public class Structure : MonoBehaviour {
 		default:
 			yield break;
 		}
+		dying = true;
 		Destroy(Instantiate(fire.gameObject, transform.position, transform.rotation), time);
 		yield return new WaitForSeconds(time);
 		Destroy(Instantiate(explosion.gameObject, transform.position, transform.rotation), 1);
 		renderer.enabled = false;
 		type = Type.None;
+		dying = false;
 	}
 
 	public void buildBuilding() {
