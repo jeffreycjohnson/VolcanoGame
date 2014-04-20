@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class State {
-	public static float money = 100;
+	public static float money = 200;
 	public enum Action {
 		Dig = 0,
 		Building = 1,
