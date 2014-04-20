@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -274,6 +275,17 @@ MonoBehaviour:
   wallCost: 100
   fire: {fileID: 400000, guid: 948753746becca5489aa971568228665, type: 2}
   explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd37287fd3414764d90351ba6876a494, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
