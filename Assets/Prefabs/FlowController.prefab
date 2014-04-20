@@ -38,8 +38,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc85e1fcd3c064041860e9d4eb9604a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinFlowDelta: 40
-  MaxFlowDelta: 60
+  MinFlowDelta: 50
+  MaxFlowDelta: 50
   MinFlowTime: 8
   MaxFlowTime: 12
   FlowHeightPerTick: 3
