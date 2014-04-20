@@ -5,6 +5,7 @@ public class DynamicHeight : MonoBehaviour {
 
     public const int MaxHeight = 3;
     public const float DeltaHeight = 0.6f;
+	public bool rotated = false;
 
     int _height = 0;
     Vector3 _lowestposition;
@@ -15,7 +16,12 @@ public class DynamicHeight : MonoBehaviour {
 
 	void Start () {
         _lowestposition = gameObject.transform.position;
-        _deltaposition = gameObject.transform.rotation * new Vector3(0, -1, 0) * DeltaHeight;
+		if(!rotated) {
+        	_deltaposition = gameObject.transform.rotation * new Vector3(0, -1, 0) * DeltaHeight;
+		}
+		else {
+			_deltaposition = gameObject.transform.rotation * new Vector3(0, 0, 1) * DeltaHeight;
+		}
         _originalcolor = gameObject.renderer.material.color;
 	}
 

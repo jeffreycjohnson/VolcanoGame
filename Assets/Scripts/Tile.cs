@@ -83,6 +83,7 @@ public class Tile : MonoBehaviour
       set
       {
           getChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height = value;
+          getChild(ChildNames.Structure).GetComponent<DynamicHeight>().Height = value;
       }
   }
 
