@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileTemplate: {fileID: 100006, guid: b5fbe0a1775b48f4cb8da0f1c85c7866, type: 2}
+  FlowController: {fileID: 100000, guid: 4ddb48ef108a84042a33fc9537f42fe9, type: 2}
   Width: 25
   Height: 15
   volcanoheight: 25

@@ -264,12 +264,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82478de8b8a2a246ad3ccfafbe995f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingModel: {fileID: 4300000, guid: a9554e8bd4a408f478c804525df54513, type: 3}
+  buildingModel: {fileID: 4300000, guid: e575cedddba8db94aa39295681c6048c, type: 3}
   buildingMaterial: {fileID: 2100000, guid: 1adfabffbfb9fec43856f2a3bc79cb09, type: 2}
   generatorModel: {fileID: 4300000, guid: 4b66e8f5580378f44a4d53ea7e932687, type: 3}
-  generatorMaterial: {fileID: 2100000, guid: 11e8be9a0d2f44047993ecf3e3e93e1c, type: 2}
+  generatorMaterial: {fileID: 2100000, guid: d19a8dade97bfab4984d604d7fbff310, type: 2}
   wallModel: {fileID: 4300000, guid: 8233ff42909e3ed46b21397b6db0f445, type: 3}
-  wallMaterial: {fileID: 2100000, guid: 11e8be9a0d2f44047993ecf3e3e93e1c, type: 2}
+  wallMaterial: {fileID: 2100000, guid: fab9257c9d3b8ee49acbcfa34ed0a1a8, type: 2}
   buildingCost: 200
   generatorCost: 500
   wallCost: 100
