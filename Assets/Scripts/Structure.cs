@@ -15,8 +15,10 @@ public class Structure : MonoBehaviour {
 
 	public Transform fire;
 	public Transform explosion;
+	public Transform generatorRunning;
 
 	private bool dying = false;
+	private GameObject child;
 
 	enum Type {
 		None,
@@ -29,9 +31,17 @@ public class Structure : MonoBehaviour {
 
 	void Update () {
 		if(transform.parent.GetComponent<Tile>().HasLava && !dying) {
-			StartCoroutine("die");
+			if(type == Type.Generator) {
+				child.particleSystem.Play();
+			}
+			else {
+				StartCoroutine("die");
+			}
 		}
-
+		else if(type == Type.Generator) {
+			child.particleSystem.Stop();
+		}
+			
 		switch(type) {
 		case Type.Building:
 			State.money += .03f;
@@ -93,6 +103,10 @@ public class Structure : MonoBehaviour {
 		GetComponent<MeshFilter>().mesh = generatorModel;
 		renderer.enabled = true;
 		type = Type.Generator;
+		child = Instantiate(generatorRunning.gameObject, transform.position, transform.rotation) as GameObject;
+		child.transform.parent = transform;
+		child.particleSystem.Stop();
+		child.particleSystem.Clear();
 	}
 
 	public void buildWall() {

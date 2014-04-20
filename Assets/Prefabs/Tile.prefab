@@ -275,6 +275,7 @@ MonoBehaviour:
   wallCost: 100
   fire: {fileID: 400000, guid: 948753746becca5489aa971568228665, type: 2}
   explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
+  generatorRunning: {fileID: 400000, guid: 4097a2c0f58b52944aea82f849eb58ce, type: 2}
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
