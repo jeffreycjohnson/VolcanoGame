@@ -3,9 +3,9 @@ using System.Collections;
 
 public class DynamicHeight : MonoBehaviour {
 
-    public const int MaxHeight = 3;
-    public const float DeltaHeight = 0.6f;
 	public bool rotated = false;
+    public const int MaxHeight = 10;
+    public const float DeltaHeight = 0.22f;
 
     int _height = 0;
     Vector3 _lowestposition;

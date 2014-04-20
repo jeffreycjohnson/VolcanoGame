@@ -4,10 +4,11 @@ using System.Collections;
 public class FlowController : MonoBehaviour {
 
     GameObject _level;
-    public int MinFlowDelta = 80;
-    public int MaxFlowDelta = 100;
+    public int MinFlowDelta = 30;
+    public int MaxFlowDelta = 40;
     public int MinFlowTime = 8;
     public int MaxFlowTime = 12;
+    public int FlowHeightPerTick = 3;
 
     int _count = 0;
     int _flowcount = 0;
@@ -54,7 +55,7 @@ public class FlowController : MonoBehaviour {
                     if (_hadlava[x][y]) _level.GetComponent<Level>()._tiles[x][y].GetComponent<Tile>().TrickleDown();
                 }
             }
-            _lavasource.GetComponent<Tile>().PatrickFlowIn();
+            _lavasource.GetComponent<Tile>().PatrickFlowIn(FlowHeightPerTick);
             _flowcount++;
             if (_flowcount == _flowtime)
             {
@@ -67,9 +68,11 @@ public class FlowController : MonoBehaviour {
 
     public void NewStream()
     {
+        // todo: make this random distribution more uniform. most important RNG.
+        // TODO TODO TODO
         GameObject tile = _level.GetComponent<Level>()._tiles[Random.Range(0, Level.LevelWidth - 1)][Level.LevelHeight - 1];
         tile.GetComponent<Tile>().GroundHeight = 2;
-        tile.GetComponent<Tile>().LavaHeight = 1;
+        tile.GetComponent<Tile>().LavaHeight = FlowHeightPerTick;
         _lavasource = tile;
     }
 }
