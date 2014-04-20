@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour {
 
 	void Update () {
 		if(!started) {
-			State.selectedGrid = new Vector2(Level.LevelWidth * 3 / 4, 0);
+			State.selectedGrid = new Vector2(Level.LevelWidth * 0.772f, 0);
 			started = true;
 		}
 		if(Input.GetJoystickNames().Length > 0) {

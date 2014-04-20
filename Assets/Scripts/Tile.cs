@@ -8,12 +8,17 @@ public class Tile : MonoBehaviour
 
   void Start()
   {
-
+      
   }
 
   void Update()
   {
 
+  }
+
+  public void SetHighlightHeight()
+  {
+      getChild(ChildNames.Highlight).GetComponent<DynamicHeight>().Height = (int)(DynamicHeight.MaxHeight * 1.2f);
   }
 
   public bool HasLava
@@ -156,7 +161,7 @@ public class Tile : MonoBehaviour
       }
    }
 
-  private Color oldColor = Color.red;
+  //private Color oldColor = Color.red;
   private bool _highlighted = false;
   public bool highlighted
   {
@@ -166,10 +171,11 @@ public class Tile : MonoBehaviour
           if (_highlighted != value)
           {
               _highlighted = value;
-
-              Color tmp = transform.FindChild("Rock").renderer.material.color;
-              transform.FindChild("Rock").renderer.material.color = oldColor;
-              oldColor = tmp;
+              if (_highlighted) getChild(ChildNames.Highlight).renderer.enabled = true;
+              else getChild(ChildNames.Highlight).renderer.enabled = false;
+              //Color tmp = transform.FindChild("Rock").renderer.material.color;
+              //transform.FindChild("Rock").renderer.material.color = oldColor;
+              //oldColor = tmp;
           }
       }
   }
@@ -215,5 +221,6 @@ public class Tile : MonoBehaviour
     public const string Lava = "Lava";
     public const string Ground = "Rock";
     public const string Structure = "Structure";
+    public const string Highlight = "Highlight";
   }
 }
