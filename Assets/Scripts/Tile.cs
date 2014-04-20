@@ -5,6 +5,7 @@ public class Tile : MonoBehaviour
 {
   private int _x, _y;
   private GameObject _level;
+  public int maxdepositallowed = 3;
 
   void Start()
   {
@@ -70,6 +71,11 @@ public class Tile : MonoBehaviour
       }
   }
 
+  public int TotalHeight()
+  {
+      return GroundHeight + LavaHeight;
+  }
+
   public void InitializeLevelData(int x, int y, GameObject level)
   {
     SetPositionInGrid(x, y);
@@ -111,7 +117,7 @@ public class Tile : MonoBehaviour
 
       if (_y == 0)
       {
-          LavaHeight -= 1;
+          LavaHeight -= maxdepositallowed;
           return;
       }
 
@@ -120,48 +126,70 @@ public class Tile : MonoBehaviour
       int leftx = Mathf.Max(_x - 1, 0);
       Tile bottomright = _level.GetComponent<Level>()._tiles[rightx][_y - 1].GetComponent<Tile>();
       Tile bottomleft = _level.GetComponent<Level>()._tiles[leftx][_y - 1].GetComponent<Tile>();
-      if (GroundHeight + LavaHeight >= bottom.GroundHeight + bottom.LavaHeight
-          && bottom.GroundHeight + bottom.LavaHeight < DynamicHeight.MaxHeight)
+      Tile right = _level.GetComponent<Level>()._tiles[rightx][_y].GetComponent<Tile>();
+      Tile left = _level.GetComponent<Level>()._tiles[leftx][_y].GetComponent<Tile>();
+
+      int bottomheightdiff = TotalHeight() - bottom.GroundHeight;
+      int bottomleftheightdiff = TotalHeight() - bottomleft.GroundHeight;
+      int bottomrightheightdiff = TotalHeight() - bottomright.GroundHeight;
+      int leftheightdiff = TotalHeight() - left.GroundHeight;
+      int rightheightdiff = TotalHeight() - right.GroundHeight;
+
+      int deposited = 0;
+      while (LavaHeight > 0 && deposited < maxdepositallowed)
       {
-          int deposited = 0;
-          while (LavaHeight > 0 && deposited < 2)
+          int depositedstart = deposited;
+          int cutoff = 0;
+          bool bottomokay = bottomheightdiff > cutoff && bottom.TotalHeight() < DynamicHeight.MaxHeight;
+          bool bottomrightokay = bottomrightheightdiff > cutoff && bottomright.TotalHeight() < DynamicHeight.MaxHeight;
+          bool bottomleftokay = bottomleftheightdiff > cutoff && bottomleft.TotalHeight() < DynamicHeight.MaxHeight;
+          bool rightokay = rightheightdiff > cutoff && right.TotalHeight() < DynamicHeight.MaxHeight;
+          bool leftokay = leftheightdiff > cutoff && left.TotalHeight() < DynamicHeight.MaxHeight;
+
+          if (bottomokay)
           {
               LavaHeight -= 1;
               bottom.LavaHeight += 1;
               deposited++;
           }
-      }
-      else if (GroundHeight + LavaHeight >= bottomright.GroundHeight + bottomright.LavaHeight
-          && bottomright.GroundHeight + bottomright.LavaHeight < DynamicHeight.MaxHeight)
-      {
-          int deposited = 0;
-          while (LavaHeight > 0 && deposited < 2)
+          if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+          if (bottomrightokay && rightokay)
           {
               LavaHeight -= 1;
               bottomright.LavaHeight += 1;
               deposited++;
           }
-      }
-      else if (GroundHeight + LavaHeight >= bottomleft.GroundHeight + bottomleft.LavaHeight
-          && bottomleft.GroundHeight + bottomleft.LavaHeight < DynamicHeight.MaxHeight)
-      {
-          int deposited = 0;
-          while (LavaHeight > 0 && deposited < 2)
+          if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+          if (bottomleftokay && leftokay)
           {
-            LavaHeight -= 1;
-            bottomleft.LavaHeight += 1;
-            deposited++;
+              LavaHeight -= 1;
+              bottomleft.LavaHeight += 1;
+              deposited++;
           }
+          if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+          /*if (rightokay)
+          {
+              LavaHeight -= 1;
+              right.LavaHeight += 1;
+              deposited++;
+          }
+          if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+          if (leftokay)
+          {
+              LavaHeight -= 1;
+              left.LavaHeight += 1;
+              deposited++;
+          }*/
+          if (deposited == depositedstart) break;
       }
 
-      if (Random.value < 0.2 && LavaHeight > 0)
+      if (Random.value < 0.1 && LavaHeight > 0)
       {
           LavaHeight -= 1;
           GroundHeight += 1;
       }
    }
 
-  //private Color oldColor = Color.red;
   private bool _highlighted = false;
   public bool highlighted
   {
@@ -173,9 +201,6 @@ public class Tile : MonoBehaviour
               _highlighted = value;
               if (_highlighted) getChild(ChildNames.Highlight).renderer.enabled = true;
               else getChild(ChildNames.Highlight).renderer.enabled = false;
-              //Color tmp = transform.FindChild("Rock").renderer.material.color;
-              //transform.FindChild("Rock").renderer.material.color = oldColor;
-              //oldColor = tmp;
           }
       }
   }
@@ -205,7 +230,7 @@ public class Tile : MonoBehaviour
     return gobj;
   }
 
-  private GameObject getChild(string childName)
+  public GameObject getChild(string childName)
   {
     Transform transform = this.gameObject.transform.FindChild(childName);
     return transform == null ? null : transform.gameObject;

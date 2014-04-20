@@ -14,6 +14,7 @@ public class Level : MonoBehaviour {
 
     public static int LevelWidth = 25; // note: change these too!
     public static int LevelHeight = 20;
+    public float MoneyPerUpdate = 0.05f;
 
 	void Start ()
     {
@@ -62,12 +63,14 @@ public class Level : MonoBehaviour {
         {
             for (int j = 0; j < Height; j++)
             {
-                _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, DynamicHeight.MaxHeight + 1);
+                _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, (int)(DynamicHeight.MaxHeight * 0.7f));
                 if (j == Height - 1) _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, (int)(DynamicHeight.MaxHeight * 0.7));
                 _tiles[i][j].GetComponent<Tile>().LavaHeight = 0;
                 _tiles[i][j].GetComponent<Tile>().SetHighlightHeight();
             }
         }
+        _tiles[0][1].GetComponent<Tile>().getChild(Tile.ChildNames.Structure).GetComponent<Structure>().buildBuilding(true);
+        _tiles[Width / 2][1].GetComponent<Tile>().getChild(Tile.ChildNames.Structure).GetComponent<Structure>().buildGenerator(true);
         GameObject controller = (GameObject)Instantiate(FlowController);
         controller.GetComponent<FlowController>().SetLevel(gameObject);
         controller.GetComponent<FlowController>().NewStream();
@@ -75,7 +78,7 @@ public class Level : MonoBehaviour {
 
 	void Update ()
     {
-	
+        State.money += MoneyPerUpdate;
 	}
 
     float RadiansToDegrees(float rad)

@@ -10,7 +10,7 @@ public class Structure : MonoBehaviour {
 	public Material wallMaterial;
 
 	public int buildingCost = 200;
-	public int generatorCost = 500;
+    public int generatorCost = 500;
 	public int wallCost = 100;
 
 	public Transform fire;
@@ -41,22 +41,22 @@ public class Structure : MonoBehaviour {
 		else if(type == Type.Generator) {
 			child.particleSystem.Stop();
 		}
-			
+
 		switch(type) {
 		case Type.Building:
-			State.money += .03f;
+			//State.money += .03f;
 			break;
 		case Type.Generator:
 			if(transform.parent.GetComponent<Tile>().HasLava) {
 				State.money += .15f;
 			}
-			State.money += .003f;
+			//State.money += .003f;
 			break;
 		case Type.Wall:
-			State.money += .003f;
+			//State.money += .003f;
 			break;
 		case Type.None:
-			State.money += .003f;
+			//State.money += .003f;
 			break;
 		}
 	}
@@ -83,22 +83,27 @@ public class Structure : MonoBehaviour {
 		dying = false;
 	}
 
-	public void buildBuilding() {
-		if(type != Type.None || transform.parent.GetComponent<Tile>().HasLava || State.money < buildingCost) {
-			return;
-		}
-		State.money -= buildingCost;
+	public void buildBuilding(bool free = false) {
+        if (type != Type.None || transform.parent.GetComponent<Tile>().HasLava) return;
+        if (!free)
+        {
+            if (State.money < buildingCost) return;
+            State.money -= buildingCost;
+        }
 		renderer.material = buildingMaterial;
 		GetComponent<MeshFilter>().mesh = buildingModel;
 		renderer.enabled = true;
 		type = Type.Building;
 	}
 
-	public void buildGenerator() {
-		if(type != Type.None || transform.parent.GetComponent<Tile>().HasLava || State.money < generatorCost) {
-			return;
-		}
-		State.money -= generatorCost;
+    public void buildGenerator(bool free = false)
+    {
+        if (type != Type.None || transform.parent.GetComponent<Tile>().HasLava) return;
+        if (!free)
+        {
+            if (State.money < generatorCost) return;
+            State.money -= generatorCost;
+        }
 		renderer.material = generatorMaterial;
 		GetComponent<MeshFilter>().mesh = generatorModel;
 		renderer.enabled = true;
@@ -109,11 +114,15 @@ public class Structure : MonoBehaviour {
 		child.particleSystem.Clear();
 	}
 
-	public void buildWall() {
-		if(type != Type.None || transform.parent.GetComponent<Tile>().HasLava || State.money < wallCost) {
-			return;
-		}
-		State.money -= wallCost;
+    public void buildWall(bool free = false)
+    {
+        if (type != Type.None || transform.parent.GetComponent<Tile>().HasLava) return;
+        if (!free)
+        {
+            if (State.money < wallCost) return;
+            State.money -= wallCost;
+        }
+        
 		renderer.material = wallMaterial;
 		GetComponent<MeshFilter>().mesh = wallModel;
 		renderer.enabled = true;
