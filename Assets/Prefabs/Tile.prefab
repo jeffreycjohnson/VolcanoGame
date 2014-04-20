@@ -334,8 +334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
-  DarkenOriginalConstant: .5
-  BrightnessDeltaConstant: 1.79999995
+  DarkenOriginalConstant: .300000012
+  BrightnessDeltaConstant: 1.89999998
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
