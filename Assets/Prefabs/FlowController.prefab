@@ -38,10 +38,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc85e1fcd3c064041860e9d4eb9604a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinFlowDelta: 500
-  MaxFlowDelta: 501
-  MinFlowTime: 5
-  MaxFlowTime: 6
+  MinFlowDelta: 80
+  MaxFlowDelta: 100
+  MinFlowTime: 8
+  MaxFlowTime: 12
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
