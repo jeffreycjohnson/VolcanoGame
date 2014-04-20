@@ -28,7 +28,7 @@ public class Structure : MonoBehaviour {
 	Type type = Type.None; 
 
 	void Update () {
-		if(transform.parent.GetComponent<Tile>().HasLava) {
+		if(transform.parent.GetComponent<Tile>().HasLava && !dying) {
 			StartCoroutine("die");
 		}
 
@@ -37,7 +37,7 @@ public class Structure : MonoBehaviour {
 			State.money += .03f;
 			break;
 		case Type.Generator:
-			if(transform.parent.GetComponent<Tile>().HasLava && !dying) {
+			if(transform.parent.GetComponent<Tile>().HasLava) {
 				State.money += .15f;
 			}
 			State.money += .003f;
