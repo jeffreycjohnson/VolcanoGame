@@ -71,6 +71,21 @@ public class Tile : MonoBehaviour
       transform.FindChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height = h;
   }
 
+  public void SetLavaHeight(int h)
+  {
+      transform.FindChild(ChildNames.Lava).GetComponent<DynamicHeight>().Height = GetGroundHeight() + h;
+  }
+
+  public int GetGroundHeight()
+  {
+      return transform.FindChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height;
+  }
+
+  public int GetLavaHeight()
+  {
+      return transform.FindChild(ChildNames.Lava).GetComponent<DynamicHeight>().Height - GetGroundHeight();
+  }
+
   /// <summary>
   /// How often the tiles update (in Fixed Updates)
   /// </summary>

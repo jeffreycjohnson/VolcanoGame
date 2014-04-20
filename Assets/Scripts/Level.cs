@@ -60,7 +60,13 @@ public class Level : MonoBehaviour {
         {
             for (int j = 0; j < Height; j++)
             {
-                _tiles[i][j].GetComponent<Tile>().SetGroundHeight((int)(Random.value * 4));
+                _tiles[i][j].GetComponent<Tile>().SetGroundHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
+                //_tiles[i][j].GetComponent<Tile>().transform.FindChild(Tile.ChildNames.Lava).GetComponent<FlowScript>().Flow();
+                if (Random.value < 0.75)
+                {
+                    _tiles[i][j].GetComponent<Tile>().SetLavaHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
+                    if (_tiles[i][j].GetComponent<Tile>().GetLavaHeight() > 0) _tiles[i][j].GetComponent<Tile>().HasLava = true;
+                }
             }
         }
     }
