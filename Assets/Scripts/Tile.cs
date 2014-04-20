@@ -231,8 +231,10 @@ public class Tile : MonoBehaviour
       }
 
       Tile bottom = _level.GetComponent<Level>()._tiles[_x][_y - 1].GetComponent<Tile>();
-      Tile bottomright = _level.GetComponent<Level>()._tiles[(_x + 1) % Level.LevelWidth][_y - 1].GetComponent<Tile>();
-      Tile bottomleft = _level.GetComponent<Level>()._tiles[(_x - 1) % Level.LevelWidth][_y - 1].GetComponent<Tile>();
+      int rightx = Mathf.Min(_x + 1, Level.LevelWidth - 1);
+      int leftx = Mathf.Max(_x - 1, 0);
+      Tile bottomright = _level.GetComponent<Level>()._tiles[rightx][_y - 1].GetComponent<Tile>();
+      Tile bottomleft = _level.GetComponent<Level>()._tiles[leftx][_y - 1].GetComponent<Tile>();
       //Tile right = _level.GetComponent<Level>()._tiles[(_x + 1) % Level.LevelWidth][_y].GetComponent<Tile>();
       //Tile left = _level.GetComponent<Level>()._tiles[(_x - 1) % Level.LevelWidth][_y].GetComponent<Tile>();
       if (GroundHeight + LavaHeight >= bottom.GroundHeight + bottom.LavaHeight

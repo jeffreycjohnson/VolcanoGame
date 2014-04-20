@@ -64,13 +64,6 @@ public class Level : MonoBehaviour {
             {
                 _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, DynamicHeight.MaxHeight + 1);
                 _tiles[i][j].GetComponent<Tile>().LavaHeight = 0;
-                //_tiles[i][j].GetComponent<Tile>().SetGroundHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
-                //_tiles[i][j].GetComponent<Tile>().transform.FindChild(Tile.ChildNames.Lava).GetComponent<FlowScript>().Flow();
-                if (Random.value < 0.75)
-                {
-                    //_tiles[i][j].GetComponent<Tile>().SetLavaHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
-                    //if (_tiles[i][j].GetComponent<Tile>().GetLavaHeight() > 0) _tiles[i][j].GetComponent<Tile>().HasLava = true;
-                }
             }
         }
         GameObject controller = (GameObject)Instantiate(FlowController);

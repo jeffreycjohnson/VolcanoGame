@@ -11,7 +11,6 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 114: {fileID: 11400002}
-  - 114: {fileID: 11400008}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -80,7 +79,7 @@ Transform:
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .99000001, y: .99000001, z: .99000001}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
 --- !u!4 &400002
@@ -89,8 +88,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalRotation: {x: -3.09086232e-08, y: -.707106829, z: .707106829, w: -3.09086232e-08}
+  m_LocalPosition: {x: 0, y: -.660000026, z: 0}
   m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -131,7 +130,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 798c9c124eb46db449d17b47bae8c23d, type: 2}
+  - {fileID: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -188,7 +187,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 0}
 --- !u!33 &3300002
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -266,24 +265,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingModel: {fileID: 4300000, guid: a9554e8bd4a408f478c804525df54513, type: 3}
   buildingMaterial: {fileID: 2100000, guid: 1adfabffbfb9fec43856f2a3bc79cb09, type: 2}
-  generatorModel: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
-  generatorMaterial: {fileID: 2100000, guid: 798c9c124eb46db449d17b47bae8c23d, type: 2}
-  wallModel: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  wallMaterial: {fileID: 2100000, guid: f66bd58f708001e4abcd03cf2bf039d1, type: 2}
+  generatorModel: {fileID: 4300000, guid: 4b66e8f5580378f44a4d53ea7e932687, type: 3}
+  generatorMaterial: {fileID: 2100000, guid: 11e8be9a0d2f44047993ecf3e3e93e1c, type: 2}
+  wallModel: {fileID: 4300000, guid: 8233ff42909e3ed46b21397b6db0f445, type: 3}
+  wallMaterial: {fileID: 2100000, guid: 11e8be9a0d2f44047993ecf3e3e93e1c, type: 2}
   buildingCost: 200
   generatorCost: 500
   wallCost: 100
---- !u!114 &11400008
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd37287fd3414764d90351ba6876a494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  fire: {fileID: 400000, guid: 948753746becca5489aa971568228665, type: 2}
+  explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
