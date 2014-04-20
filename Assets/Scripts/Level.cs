@@ -4,6 +4,7 @@ using System.Collections;
 public class Level : MonoBehaviour {
 
     public GameObject TileTemplate;
+    public GameObject FlowController;
     public int Width = 25;
     public int Height = 15;
     public float volcanoheight = 25;
@@ -11,8 +12,8 @@ public class Level : MonoBehaviour {
     public float volcanotopradius = 5;
     public GameObject[][] _tiles;
 
-    public static int LevelWidth;
-    public static int LevelHeight;
+    public static int LevelWidth = 25; // note: change these too!
+    public static int LevelHeight = 20;
 
 	void Start ()
     {
@@ -33,6 +34,7 @@ public class Level : MonoBehaviour {
             for (int x = 0; x < Width; x++)
             {
                 GameObject tile = (GameObject)Instantiate(TileTemplate);
+                tile.name = (x.ToString() + "," + y);
                 tile.GetComponent<Tile>().InitializeLevelData(x, y, gameObject);
                 tile.gameObject.transform.parent = gameObject.transform;
                 _tiles[x][y] = tile;
@@ -60,15 +62,20 @@ public class Level : MonoBehaviour {
         {
             for (int j = 0; j < Height; j++)
             {
-                _tiles[i][j].GetComponent<Tile>().SetGroundHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
+                _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, DynamicHeight.MaxHeight + 1);
+                _tiles[i][j].GetComponent<Tile>().LavaHeight = 0;
+                //_tiles[i][j].GetComponent<Tile>().SetGroundHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
                 //_tiles[i][j].GetComponent<Tile>().transform.FindChild(Tile.ChildNames.Lava).GetComponent<FlowScript>().Flow();
                 if (Random.value < 0.75)
                 {
-                    _tiles[i][j].GetComponent<Tile>().SetLavaHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
-                    if (_tiles[i][j].GetComponent<Tile>().GetLavaHeight() > 0) _tiles[i][j].GetComponent<Tile>().HasLava = true;
+                    //_tiles[i][j].GetComponent<Tile>().SetLavaHeight((int)(Random.value * (DynamicHeight.MaxHeight + 1)));
+                    //if (_tiles[i][j].GetComponent<Tile>().GetLavaHeight() > 0) _tiles[i][j].GetComponent<Tile>().HasLava = true;
                 }
             }
         }
+        GameObject controller = (GameObject)Instantiate(FlowController);
+        controller.GetComponent<FlowController>().SetLevel(gameObject);
+        controller.GetComponent<FlowController>().NewStream();
     }
 
 	void Update ()
