@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour
   private bool _dripped;
 
   private bool _hasLava;
-  public bool HasLava
+  /*public bool HasLava
   {
     get { return _hasLava; }
     set
@@ -32,6 +32,14 @@ public class Tile : MonoBehaviour
         }
       }
     }
+  }*/
+
+  public bool HasLava
+  {
+      get
+      {
+          return LavaHeight > 0;
+      }
   }
 
   private bool _hasRock;
@@ -66,6 +74,30 @@ public class Tile : MonoBehaviour
     }
   }
 
+  public int GroundHeight
+  {
+      get
+      {
+          return getChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height;
+      }
+      set
+      {
+          getChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height = value;
+      }
+  }
+
+  public int LavaHeight
+  {
+      get
+      {
+          return transform.FindChild(ChildNames.Lava).GetComponent<DynamicHeight>().Height - GroundHeight;
+      }
+      set
+      {
+          getChild(ChildNames.Lava).GetComponent<DynamicHeight>().Height = value + GroundHeight;
+      }
+  }
+    /*
   public void SetGroundHeight(int h)
   {
       transform.FindChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height = h;
@@ -85,6 +117,11 @@ public class Tile : MonoBehaviour
   {
       return transform.FindChild(ChildNames.Lava).GetComponent<DynamicHeight>().Height - GetGroundHeight();
   }
+
+  public int GetTotalHeight()
+  {
+      return GetGroundHeight() + GetLavaHeight();
+  }*/
 
   /// <summary>
   /// How often the tiles update (in Fixed Updates)
@@ -114,13 +151,13 @@ public class Tile : MonoBehaviour
   void Start()
   {
     // we initially want lava hidden
-    DisableChildObject(ChildNames.Lava);
+    //DisableChildObject(ChildNames.Lava);
     // lava.GetComponent<FlowScript>().IsFlowing = false;
 
     // set up the callback
-    RegisterFlowCallback();
+    //RegisterFlowCallback();
   }
-
+/*
   private void RegisterFlowCallback()
   {
     GameObject lava = getChild(ChildNames.Lava);
@@ -129,14 +166,14 @@ public class Tile : MonoBehaviour
     {
       lava.GetComponent<FlowScript>().RegisterFlowCallback(OnFlow);
     }
-  }
+  }*/
 
   // Update is called once per frame
   void Update()
   {
   }
 
-  void FixedUpdate()
+  /*void FixedUpdate()
   {
     _currentTick++;
 
@@ -146,7 +183,7 @@ public class Tile : MonoBehaviour
 
       TickUpdate();
     }
-  }
+  }*/
 
   public void InitializeLevelData(int x, int y, GameObject level)
   {
@@ -169,6 +206,122 @@ public class Tile : MonoBehaviour
   {
   }
 
+  public void PatrickFlowIn()
+  {
+      if (GroundHeight + LavaHeight < DynamicHeight.MaxHeight)
+      {
+          gameObject.GetComponent<Tile>().LavaHeight += 1;
+      }
+      else
+      {
+          // if our block is already full, gg
+      }
+  }
+
+  // flow 1 unit out. standard "update".
+    // TODO: return true or false as to whether it was able? should that be done in flow in? determine this.
+  public void TrickleDown()
+  {
+      if (LavaHeight == 0) return;
+
+      if (_y == 0)
+      {
+          LavaHeight -= 1;
+          return;
+      }
+
+      Tile bottom = _level.GetComponent<Level>()._tiles[_x][_y - 1].GetComponent<Tile>();
+      int rightx = Mathf.Min(_x + 1, Level.LevelWidth - 1);
+      int leftx = Mathf.Max(_x - 1, 0);
+      Tile bottomright = _level.GetComponent<Level>()._tiles[rightx][_y - 1].GetComponent<Tile>();
+      Tile bottomleft = _level.GetComponent<Level>()._tiles[leftx][_y - 1].GetComponent<Tile>();
+      //Tile right = _level.GetComponent<Level>()._tiles[(_x + 1) % Level.LevelWidth][_y].GetComponent<Tile>();
+      //Tile left = _level.GetComponent<Level>()._tiles[(_x - 1) % Level.LevelWidth][_y].GetComponent<Tile>();
+      if (GroundHeight + LavaHeight >= bottom.GroundHeight + bottom.LavaHeight
+          && bottom.GroundHeight + bottom.LavaHeight < DynamicHeight.MaxHeight)
+      {
+          LavaHeight -= 1;
+          bottom.LavaHeight += 1;
+      }
+      else if (GroundHeight + LavaHeight >= bottomright.GroundHeight + bottomright.LavaHeight
+          && bottomright.GroundHeight + bottomright.LavaHeight < DynamicHeight.MaxHeight)
+      {
+          LavaHeight -= 1;
+          bottomright.LavaHeight += 1;
+      }
+      else if (GroundHeight + LavaHeight >= bottomleft.GroundHeight + bottomleft.LavaHeight
+          && bottomleft.GroundHeight + bottomleft.LavaHeight < DynamicHeight.MaxHeight)
+      {
+          LavaHeight -= 1;
+          bottomleft.LavaHeight += 1;
+      }
+      /*else if (GroundHeight + LavaHeight >= right.GroundHeight + right.LavaHeight
+          && right.GroundHeight + right.LavaHeight < DynamicHeight.MaxHeight)
+      {
+          LavaHeight -= 1;
+          right.LavaHeight += 1;
+      }
+      else if (GroundHeight + LavaHeight >= left.GroundHeight + left.LavaHeight
+          && left.GroundHeight + left.LavaHeight < DynamicHeight.MaxHeight)
+      {
+          LavaHeight -= 1;
+          left.LavaHeight += 1;
+      }*/
+   }
+
+      /*if (!HasLava) return;
+
+      // Case: if in the bottom row, just empty out.
+      if (_y == 0)
+      {
+          SetLavaHeight(GetLavaHeight() - 1);
+          if (GetLavaHeight() == 0) HasLava = false;
+      }
+      else
+      {
+          GameObject below = _level.GetComponent<Level>()._tiles[_x][_y - 1];
+          int leftx = _x - 1;
+          if (leftx == 0) leftx = Level.LevelWidth - 1;
+          int rightx = _x + 1;
+          if (rightx == Level.LevelWidth) rightx = 0;
+          GameObject belowleft = _level.GetComponent<Level>()._tiles[leftx][_y - 1];
+          GameObject belowright = _level.GetComponent<Level>()._tiles[rightx][_y - 1];
+          // todo: refactor these cases into order of priority: bottom, bottom left, bottom right, left, right, etc?
+          // Case: if our total height is greater than the space below, and it's also not at the max height, flow straight down.
+          if (GetTotalHeight() > below.GetComponent<Tile>().GetTotalHeight())
+          {
+              if (!below.GetComponent<Tile>().HasLava)
+              {
+                  below.GetComponent<Tile>().HasLava = true;
+                  below.GetComponent<Tile>().SetLavaHeight(1);
+              }
+              else below.GetComponent<Tile>().SetLavaHeight(below.GetComponent<Tile>().GetLavaHeight() + 1);
+
+              //below.GetComponent<Tile>().SetLavaHeight(below.GetComponent<Tile>().GetLavaHeight() + 1);
+              //if (!below.GetComponent<Tile>().HasLava) below.GetComponent<Tile>().HasLava = true;
+
+              SetLavaHeight(GetLavaHeight() - 1);
+              if (GetLavaHeight() == 0) HasLava = false;
+          }
+          // Case: we are not able to flow into the space below, so let's try below and to the left and right.
+          else if (GetTotalHeight() > belowleft.GetComponent<Tile>().GetTotalHeight())
+          {
+              belowleft.GetComponent<Tile>().SetLavaHeight(belowleft.GetComponent<Tile>().GetLavaHeight() + 1);
+              if (!belowleft.GetComponent<Tile>().HasLava) belowleft.GetComponent<Tile>().HasLava = true;
+
+              SetLavaHeight(GetLavaHeight() - 1);
+              if (GetLavaHeight() == 0) HasLava = false;
+          }
+          else if (GetTotalHeight() > belowright.GetComponent<Tile>().GetTotalHeight())
+          {
+              belowright.GetComponent<Tile>().SetLavaHeight(belowright.GetComponent<Tile>().GetLavaHeight() + 1);
+              if (!belowright.GetComponent<Tile>().HasLava) belowright.GetComponent<Tile>().HasLava = true;
+
+              SetLavaHeight(GetLavaHeight() - 1);
+              if (GetLavaHeight() == 0) HasLava = false;
+          }
+      }*/
+    /*
   public void OnFlow()
   {
     if (_dripped) return;
@@ -212,7 +365,7 @@ public class Tile : MonoBehaviour
         downRightTile.HasLava = true;
       }
     }
-  }
+  }*/
 
   private GameObject EnableChildObject(string objectName)
   {
