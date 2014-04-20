@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.Collections;
 
 public class FlowController : MonoBehaviour {
@@ -14,7 +15,7 @@ public class FlowController : MonoBehaviour {
     int _flowcount = 0;
     int _flowdelta = 0;
     int _flowtime = 0;
-    GameObject _lavasource;
+    List<GameObject> _lavasource = new List<GameObject>();
     bool[][] _hadlava;
 
 	void Start ()
@@ -26,6 +27,7 @@ public class FlowController : MonoBehaviour {
         {
             _hadlava[x] = new bool[Level.LevelHeight];
         }
+		StartCoroutine("Eruption");
 	}
 
     public void SetLevel(GameObject level)
@@ -55,15 +57,32 @@ public class FlowController : MonoBehaviour {
                     if (_hadlava[x][y]) _level.GetComponent<Level>()._tiles[x][y].GetComponent<Tile>().TrickleDown();
                 }
             }
-            _lavasource.GetComponent<Tile>().PatrickFlowIn(FlowHeightPerTick);
+			foreach(GameObject tile in _lavasource)
+			{
+            	tile.GetComponent<Tile>().PatrickFlowIn(FlowHeightPerTick);
+			}
             _flowcount++;
             if (_flowcount == _flowtime)
             {
                 _flowcount = 0;
                 _flowtime = Random.Range(MinFlowTime, MaxFlowTime);
+				_lavasource.Clear();
                 NewStream();
             }
         }
+	}
+
+	IEnumerator Eruption()
+	{
+		while(true)
+		{
+			yield return new WaitForSeconds(60);
+			_flowtime = Random.Range(MinFlowTime, MaxFlowTime);
+			for(int i = 0; i < 6; i++)
+			{
+				NewStream();
+			}
+		}
 	}
 
     public void NewStream()
@@ -73,6 +92,6 @@ public class FlowController : MonoBehaviour {
         GameObject tile = _level.GetComponent<Level>()._tiles[Random.Range(0, Level.LevelWidth - 1)][Level.LevelHeight - 1];
         tile.GetComponent<Tile>().GroundHeight = 2;
         tile.GetComponent<Tile>().LavaHeight = FlowHeightPerTick;
-        _lavasource = tile;
+        _lavasource.Add(tile);
     }
 }
