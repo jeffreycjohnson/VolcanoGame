@@ -27,6 +27,6 @@ public class CameraController : MonoBehaviour {
 			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().highlighted = true;
 		}
 		transform.RotateAround(Vector3.zero, Vector3.up, -Input.GetAxis("Horizontal"));
-		transform.RotateAround(Vector3.zero, Vector3.up, -Input.acceleration.x);
+		transform.RotateAround(Vector3.zero, Vector3.up, -Input.acceleration.x * 3);
 	}
 }

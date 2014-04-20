@@ -10,20 +10,31 @@ public class UI : MonoBehaviour {
 	private GameObject clicked;
 
 	void OnGUI() {
-		if(Input.GetJoystickNames().Length == 0) {
-			if(GUI.Button(new Rect(10, 10, 100, 100), Building)) {
-				clicked.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
-			}
-			if(GUI.Button(new Rect(10, 120, 100, 100), Wall)) {
-				clicked.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
-			}
-			if(GUI.Button(new Rect(10, 230, 100, 100), Generator)) {
-				clicked.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
-			}
-			if(GUI.Button(new Rect(10, 340, 100, 100), Dig)) {
-			}
+		GUI.skin.label.fontSize = 24;
+		if(GUI.Button(new Rect(10, 10, 100, 100), Building)) {
+			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
 		}
-		GUI.Label(new Rect(Screen.width - 75, 25, 50, 50), ((int)State.money).ToString());
+		if(GUI.Button(new Rect(10, 120, 100, 100), Wall)) {
+			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
+		}
+		if(GUI.Button(new Rect(10, 230, 100, 100), Generator)) {
+			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
+		}
+		if(GUI.Button(new Rect(10, 340, 100, 100), Dig)) {
+		}
+		if(Input.GetJoystickNames().Length == 0) {
+			GUI.Label(new Rect(55, 42, 20, 40), "1");
+			GUI.Label(new Rect(55, 152, 20, 40), "2");
+			GUI.Label(new Rect(55, 262, 20, 40), "3");
+			GUI.Label(new Rect(55, 372, 20, 40), "4");
+		}
+		else {
+			GUI.Label(new Rect(55, 42, 20, 40), "A");
+			GUI.Label(new Rect(55, 152, 20, 40), "B");
+			GUI.Label(new Rect(55, 262, 20, 40), "X");
+			GUI.Label(new Rect(55, 372, 20, 40), "Y");
+		}
+		GUI.Label(new Rect(Screen.width - 200, 25, 200, 50), "Money: " + ((int)State.money).ToString());
 	}
 
 	void Update() {
