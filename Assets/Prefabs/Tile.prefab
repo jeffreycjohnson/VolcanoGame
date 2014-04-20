@@ -269,6 +269,11 @@ MonoBehaviour:
   generatorMaterial: {fileID: 2100000, guid: f66bd58f708001e4abcd03cf2bf039d1, type: 2}
   wallModel: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   wallMaterial: {fileID: 2100000, guid: f66bd58f708001e4abcd03cf2bf039d1, type: 2}
+  buildingCost: 200
+  generatorCost: 500
+  wallCost: 100
+  fire: {fileID: 400000, guid: 948753746becca5489aa971568228665, type: 2}
+  explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

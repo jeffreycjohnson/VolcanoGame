@@ -13,6 +13,9 @@ public class Structure : MonoBehaviour {
 	public int generatorCost = 500;
 	public int wallCost = 100;
 
+	public Transform fire;
+	public Transform explosion;
+
 	enum Type {
 		None,
 		Building,
@@ -24,9 +27,9 @@ public class Structure : MonoBehaviour {
 
 	void Update () {
 		if(transform.parent.GetComponent<Tile>().HasLava && type == Type.Building) {
-			renderer.enabled = false;
-			type = Type.None;
+			StartCoroutine("die");
 		}
+
 		switch(type) {
 		case Type.Building:
 			State.money += .03f;
@@ -44,6 +47,15 @@ public class Structure : MonoBehaviour {
 			State.money += .003f;
 			break;
 		}
+	}
+
+	IEnumerator die()
+	{
+		Destroy(Instantiate(fire.gameObject, transform.position, transform.rotation), 3);
+		yield return new WaitForSeconds(3);
+		Destroy(Instantiate(explosion.gameObject, transform.position, transform.rotation), 1);
+		renderer.enabled = false;
+		type = Type.None;
 	}
 
 	public void buildBuilding() {
