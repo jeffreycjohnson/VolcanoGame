@@ -63,7 +63,10 @@ public class Level : MonoBehaviour {
         {
             for (int j = 0; j < Height; j++)
             {
-                _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, (int)(DynamicHeight.MaxHeight * 0.7f));
+                //_tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, (int)(DynamicHeight.MaxHeight * 0.7f));
+                //_tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range((int)(DynamicHeight.MaxHeight * 0.2f), (int)(DynamicHeight.MaxHeight * 0.6f));
+                _tiles[i][j].GetComponent<Tile>().GroundHeight = (int)(0f * DynamicHeight.MaxHeight) + 
+                    (int)(Mathf.PerlinNoise((float)j / Width * 7f, (float)i / Height * 7f) * (float)DynamicHeight.MaxHeight * 0.9f);
                 _tiles[i][j].GetComponent<Tile>().LavaHeight = 0;
                 _tiles[i][j].GetComponent<Tile>().SetHighlightHeight();
             }
