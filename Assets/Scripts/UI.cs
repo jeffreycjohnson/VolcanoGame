@@ -91,7 +91,7 @@ public class UI : MonoBehaviour {
 				if(clicked != null) {
 					clicked.GetComponent<Tile>().highlighted = false;
 				}
-				clicked = hit.collider.gameObject;
+				clicked = hit.collider.transform.parent.gameObject;
 				clicked.GetComponent<Tile>().highlighted = true;
 			}
 		}
@@ -103,7 +103,7 @@ public class UI : MonoBehaviour {
 					if(clicked != null) {
 						clicked.GetComponent<Tile>().highlighted = false;
 					}
-					clicked = hit.collider.gameObject;
+					clicked = hit.collider.transform.parent.gameObject;
 					clicked.GetComponent<Tile>().highlighted = true;
 				}
 			}
