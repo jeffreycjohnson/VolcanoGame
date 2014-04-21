@@ -77,6 +77,7 @@ public class FlowController : MonoBehaviour {
 		while(true)
 		{
 			yield return new WaitForSeconds(60);
+			_flowcount = 0;
 			_flowtime = Random.Range(MinFlowTime, MaxFlowTime);
 			for(int i = 0; i < 6; i++)
 			{
