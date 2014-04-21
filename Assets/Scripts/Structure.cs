@@ -20,7 +20,8 @@ public class Structure : MonoBehaviour {
 
 	private bool dying = false;
 	private GameObject child;
-    private int health = 15;
+    public int Health = 15;
+    private int _health = 0;
 
 	public enum Type {
 		None,
@@ -34,6 +35,11 @@ public class Structure : MonoBehaviour {
     public Type GetType()
     {
         return type;
+    }
+
+    void Start()
+    {
+        _health = Health;
     }
 
 	void Update () {
@@ -55,12 +61,16 @@ public class Structure : MonoBehaviour {
 			break;
 		case Type.Generator:
 			if(transform.parent.GetComponent<Tile>().HasLava) {
-				State.money += .15f;
+				State.money += .3f;
 			}
 			//State.money += .003f;
 			break;
 		case Type.Wall:
-            if (health <= 0 && !dying) StartCoroutine(die());
+            if (_health <= 0 && !dying)
+            {
+                StartCoroutine(die());
+                _health = Health;
+            }
 			//State.money += .003f;
 			break;
 		case Type.None:
@@ -139,7 +149,8 @@ public class Structure : MonoBehaviour {
 
     public void Hurt(int amount)
     {
-        health -= amount;
+        if (dying) return;
+        _health -= amount;
         if (!dying) Destroy(Instantiate(smallexplosion.gameObject, transform.position, transform.rotation), 1);
     }
 }

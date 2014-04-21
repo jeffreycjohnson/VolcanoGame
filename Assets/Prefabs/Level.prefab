@@ -45,6 +45,7 @@ MonoBehaviour:
   volcanoheight: 25
   volcanoradius: 20
   volcanotopradius: 5
+  MoneyPerUpdate: .200000003
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

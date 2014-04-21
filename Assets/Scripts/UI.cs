@@ -50,6 +50,11 @@ public class UI : MonoBehaviour {
 			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
 		}
 		if(Input.GetButtonDown("Y")) {
+            if (level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().LavaHeight == 0)
+            {
+                //level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().LavaHeight -= 2;
+                level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().GroundHeight -= 3;
+            }
 		}
 		if(Input.GetKeyDown("mouse 0")) {
 			RaycastHit hit;

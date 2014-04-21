@@ -54,8 +54,10 @@ public class Tile : MonoBehaviour
       }
       set
       {
+          int dheight = LavaHeight;
           getChild(ChildNames.Ground).GetComponent<DynamicHeight>().Height = value;
-          getChild(ChildNames.Structure).GetComponent<DynamicHeight>().Height = value;
+          getChild(ChildNames.Structure).GetComponent<DynamicHeight>().Height = value + 1;
+          LavaHeight = dheight;
       }
   }
 
@@ -186,10 +188,10 @@ public class Tile : MonoBehaviour
           if (deposited == depositedstart) break;
       }
 
-      if (Random.value < 0.1 && LavaHeight > 0)
+      if (Random.value < 0.15 && LavaHeight > 0)
       {
           LavaHeight -= 1;
-          GroundHeight += 1;
+          GroundHeight += 2;
       }
    }
 
