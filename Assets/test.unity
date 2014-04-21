@@ -387,7 +387,7 @@ MonoBehaviour:
   Building: {fileID: 2800000, guid: 3117b395e93b9f744b9d1c6bdf0bba9a, type: 3}
   Wall: {fileID: 2800000, guid: 79c254d862cf7aa44b7de3f64e416b5f, type: 3}
   Generator: {fileID: 2800000, guid: 77729f86eea67c4429856fefd2186608, type: 3}
-  Dig: {fileID: 2800000, guid: ba38a2fb8ffab894fb6cd33cc4b5d8d1, type: 3}
+  Dig: {fileID: 2800000, guid: 6ac52575e16f85c42b978aeb2cdacfb5, type: 3}
   level: {fileID: 1242254783}
   A: {fileID: 2800000, guid: 02a9a088eeba62f42b301e2fac59985c, type: 3}
   B: {fileID: 2800000, guid: 97d099abd4fad4a4bb092aa2715d5eee, type: 3}
