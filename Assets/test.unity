@@ -433,8 +433,8 @@ ParticleSystemRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 956930297}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
@@ -485,29 +485,19 @@ ParticleSystem:
           inSlope: 0
           outSlope: 0
           tangentMode: 0
-        - time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
       minCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 1
-          value: 0
+          value: .75000006
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-      minMaxState: 0
+      minMaxState: 3
     startSpeed:
       scalar: 0
       maxCurve:
@@ -1673,8 +1663,8 @@ ParticleSystemRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1408031371}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
@@ -1943,7 +1933,7 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: .100000001
     inheritVelocity: 0
-    maxNumParticles: 1000
+    maxNumParticles: 50
   ShapeModule:
     serializedVersion: 2
     enabled: 1
@@ -2781,6 +2771,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -5.63607025
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 6b436d069d11415d1100ab9b44295342, type: 2}
+      propertyPath: m_ReceiveShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6b436d069d11415d1100ab9b44295342, type: 2}
   m_RootGameObject: {fileID: 2003634689}
@@ -2986,16 +2980,11 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 20
+      scalar: 15
       maxCurve:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 1
           value: 1
           inSlope: 0
           outSlope: 0
@@ -3006,18 +2995,13 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - time: 1
-          value: 0
+          value: .666666687
           inSlope: 0
           outSlope: 0
           tangentMode: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
-      minMaxState: 0
+      minMaxState: 3
     startSpeed:
       scalar: 6
       maxCurve:
@@ -3203,7 +3187,7 @@ ParticleSystem:
       minMaxState: 0
     gravityModifier: .0500000007
     inheritVelocity: 0
-    maxNumParticles: 1000
+    maxNumParticles: 175
   ShapeModule:
     serializedVersion: 2
     enabled: 1
