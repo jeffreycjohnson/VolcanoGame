@@ -19,6 +19,10 @@ public class UI : MonoBehaviour {
 
 	private GameObject clicked;
 
+	void Start() {
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+	}
+
 	void OnGUI() {
 		GUI.skin.label.fontSize = 24;
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
