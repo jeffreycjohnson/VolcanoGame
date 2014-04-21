@@ -23,10 +23,12 @@ public class UI : MonoBehaviour {
 		if(GUI.Button(new Rect(10, 340, 100, 100), Dig)) {
 		}
 		if(Input.GetJoystickNames().Length == 0) {
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
 			GUI.Label(new Rect(55, 42, 20, 40), "1");
 			GUI.Label(new Rect(55, 152, 20, 40), "2");
 			GUI.Label(new Rect(55, 262, 20, 40), "3");
 			GUI.Label(new Rect(55, 372, 20, 40), "4");
+#endif
 		}
 		else {
 			GUI.Label(new Rect(55, 42, 20, 40), "A");
