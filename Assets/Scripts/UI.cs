@@ -21,16 +21,21 @@ public class UI : MonoBehaviour {
 
 	void OnGUI() {
 		GUI.skin.label.fontSize = 24;
-		if(GUI.Button(new Rect(10, 10, 100, 100), Building)) {
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+		int size = 100;
+#else
+		int size = 200;
+#endif
+		if(GUI.Button(new Rect(10, 10, size, size), Building)) {
 			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
 		}
-		if(GUI.Button(new Rect(10, 120, 100, 100), Wall)) {
+		if(GUI.Button(new Rect(10, 20 + size, size, size), Wall)) {
 			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
 		}
-		if(GUI.Button(new Rect(10, 230, 100, 100), Generator)) {
+		if(GUI.Button(new Rect(10, 30 + size * 2, size, size), Generator)) {
 			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
 		}
-		if(GUI.Button(new Rect(10, 340, 100, 100), Dig)) {
+		if(GUI.Button(new Rect(10, 40 + size * 3, size, size), Dig)) {
 			if (clicked.GetComponent<Tile>().LavaHeight == 0)
 			{
 				clicked.GetComponent<Tile>().GroundHeight -= 3;
