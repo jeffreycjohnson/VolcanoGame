@@ -18,3 +18,4 @@ ProjectSettings/QualitySettings.asset
 *.userprefs
 Assets/Standard Assets/*
 Assets/Standard assets.meta
+*.apk
