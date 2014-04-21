@@ -71,8 +71,8 @@ public class Level : MonoBehaviour {
                 _tiles[i][j].GetComponent<Tile>().SetHighlightHeight();
             }
         }
-        _tiles[0][1].GetComponent<Tile>().getChild(Tile.ChildNames.Structure).GetComponent<Structure>().buildBuilding(true);
-        _tiles[Width / 2][1].GetComponent<Tile>().getChild(Tile.ChildNames.Structure).GetComponent<Structure>().buildGenerator(true);
+        //_tiles[0][1].GetComponent<Tile>().getChild(Tile.ChildNames.Structure).GetComponent<Structure>().buildBuilding(true);
+        //_tiles[Width / 2][1].GetComponent<Tile>().getChild(Tile.ChildNames.Structure).GetComponent<Structure>().buildGenerator(true);
         GameObject controller = (GameObject)Instantiate(FlowController);
         controller.GetComponent<FlowController>().SetLevel(gameObject);
         controller.GetComponent<FlowController>().NewStream();

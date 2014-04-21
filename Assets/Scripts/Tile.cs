@@ -187,8 +187,9 @@ public class Tile : MonoBehaviour
           }
           if (deposited == depositedstart) break;
       }
-
-      if (Random.value < 0.15 && LavaHeight > 0)
+      float prob = 0.15f;
+      if (deposited == 0) prob += 0.3f;
+      if (Random.value < prob && LavaHeight > 0)
       {
           LavaHeight -= 1;
           GroundHeight += 2;

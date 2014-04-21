@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acac9c80a8cc7f74e80ef1d39b4fb6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxdepositallowed: 3
+  maxdepositallowed: 4
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,8 +297,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
-  DarkenOriginalConstant: .200000003
-  BrightnessDeltaConstant: 1.39999998
+  _originalcolor: {r: .345588207, g: .345588207, b: .345588207, a: 0}
+  _topcolor: {r: 1, g: 1, b: 1, a: 1}
+  FadeAmount: 3
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,6 +324,7 @@ MonoBehaviour:
   explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
   smallexplosion: {fileID: 400000, guid: 633e763395b4e034e91ee3bae665aa08, type: 2}
   generatorRunning: {fileID: 400000, guid: 4097a2c0f58b52944aea82f849eb58ce, type: 2}
+  Health: 15
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,8 +337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
-  DarkenOriginalConstant: .200000003
-  BrightnessDeltaConstant: 2.0999999
+  _originalcolor: {r: 1, g: .600000024, b: 0, a: 0}
+  _topcolor: {r: 1, g: .944218874, b: .191176474, a: 1}
+  FadeAmount: 1.79999995
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -349,8 +352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 1
-  DarkenOriginalConstant: .200000003
-  BrightnessDeltaConstant: 1.20000005
+  _originalcolor: {r: 1, g: 1, b: 1, a: 0}
+  _topcolor: {r: 1, g: 1, b: 1, a: 1}
+  FadeAmount: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,8 +367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
-  DarkenOriginalConstant: .200000003
-  BrightnessDeltaConstant: 1.20000005
+  _originalcolor: {r: 0, g: 0, b: 0, a: 0}
+  _topcolor: {r: 1, g: 1, b: 1, a: 1}
+  FadeAmount: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

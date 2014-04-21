@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class State {
-	public static float money = 200;
+	public static float money = 1000;
 	public enum Action {
 		Dig = 0,
 		Building = 1,
