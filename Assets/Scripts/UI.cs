@@ -6,6 +6,11 @@ public class UI : MonoBehaviour {
 	public Texture2D Generator;
 	public Texture2D Dig;
 	public Transform level;
+	
+	public Texture2D A;
+	public Texture2D B;
+	public Texture2D X;
+	public Texture2D Y;
 
 	private GameObject clicked;
 
@@ -31,10 +36,10 @@ public class UI : MonoBehaviour {
 #endif
 		}
 		else {
-			GUI.Label(new Rect(55, 42, 20, 40), "A");
-			GUI.Label(new Rect(55, 152, 20, 40), "B");
-			GUI.Label(new Rect(55, 262, 20, 40), "X");
-			GUI.Label(new Rect(55, 372, 20, 40), "Y");
+			GUI.Label(new Rect(120, 35, 40, 40), A);
+			GUI.Label(new Rect(120, 145, 40, 40),B);
+			GUI.Label(new Rect(120, 255, 40, 40), X);
+			GUI.Label(new Rect(120, 365, 40, 40), Y);
 		}
 		GUI.Label(new Rect(Screen.width - 200, 25, 200, 50), "Money: " + ((int)State.money).ToString());
 	}
