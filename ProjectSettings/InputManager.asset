@@ -251,7 +251,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick button 0
     altNegativeButton: 
-    altPositiveButton: 1
+    altPositiveButton: 
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
@@ -267,7 +267,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick button 1
     altNegativeButton: 
-    altPositiveButton: 2
+    altPositiveButton: 
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
@@ -283,7 +283,7 @@ InputManager:
     negativeButton: 
     positiveButton: joystick button 2
     altNegativeButton: 
-    altPositiveButton: 3
+    altPositiveButton: 
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
@@ -299,7 +299,71 @@ InputManager:
     negativeButton: 
     positiveButton: joystick button 3
     altNegativeButton: 
-    altPositiveButton: 4
+    altPositiveButton: 
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: K1
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 1
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: K2
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 2
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: K3
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 3
+    altNegativeButton: 
+    altPositiveButton: 
+    gravity: 1000
+    dead: .00100000005
+    sensitivity: 1000
+    snap: 0
+    invert: 0
+    type: 0
+    axis: 0
+    joyNum: 0
+  - serializedVersion: 3
+    m_Name: K4
+    descriptiveName: 
+    descriptiveNegativeName: 
+    negativeButton: 
+    positiveButton: 4
+    altNegativeButton: 
+    altPositiveButton: 
     gravity: 1000
     dead: .00100000005
     sensitivity: 1000
