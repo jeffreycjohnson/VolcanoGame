@@ -75,7 +75,6 @@ public class UI : MonoBehaviour {
 		if(Input.GetButtonDown("Y")) {
             if (level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().LavaHeight == 0)
             {
-                //level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().LavaHeight -= 2;
                 level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().GroundHeight -= 3;
             }
 		}

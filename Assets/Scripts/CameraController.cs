@@ -27,7 +27,6 @@ public class CameraController : MonoBehaviour {
 			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().highlighted = true;
 		}
 		transform.RotateAround(Vector3.zero, Vector3.up, -Input.GetAxis("Horizontal"));
-		//transform.RotateAround(Vector3.zero, Vector3.up, -Input.acceleration.x * 3);
 		foreach(Touch touch in Input.touches) {
 			if(touch.phase == TouchPhase.Moved) {
 				transform.RotateAround(Vector3.zero, Vector3.up, touch.deltaPosition.x);

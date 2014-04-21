@@ -7,16 +7,6 @@ public class Tile : MonoBehaviour
   private GameObject _level;
   public int maxdepositallowed = 3;
 
-  void Start()
-  {
-      
-  }
-
-  void Update()
-  {
-
-  }
-
   public void SetHighlightHeight()
   {
       getChild(ChildNames.Highlight).GetComponent<DynamicHeight>().Height = (int)(DynamicHeight.MaxHeight * 1.2f);
@@ -90,16 +80,6 @@ public class Tile : MonoBehaviour
     _x = x;
     _y = y;
   }
-
-  /*public int GetX()
-  {
-      return _x;
-  }
-
-  public int GetY()
-  {
-      return _y;
-  }*/
 
   private void SetLevel(GameObject level)
   {
@@ -198,7 +178,7 @@ public class Tile : MonoBehaviour
 
   private bool HasWall()
   {
-      return getChild(ChildNames.Structure).GetComponent<Structure>().GetType() == Structure.Type.Wall;
+      return getChild(ChildNames.Structure).GetComponent<Structure>().GetStructureType() == Structure.Type.Wall;
   }
 
   private bool TileOkay(Tile other, int cutoff)

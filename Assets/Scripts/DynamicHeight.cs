@@ -32,13 +32,9 @@ public class DynamicHeight : MonoBehaviour {
         set
         {
             _height = Mathf.Clamp(value, 0, MaxHeight);
-            if (value < 0 || value > MaxHeight) Debug.Log("DynamicHeight being set too high or low. Clamped.");
+            //if (value < 0 || value > MaxHeight) Debug.Log("DynamicHeight being set too high or low. Clamped.");
             gameObject.transform.position = _lowestposition + (float)Height * _deltaposition;
             gameObject.renderer.material.color = _originalcolor + (float)Height / (float)MaxHeight * ((_topcolor - _originalcolor) * FadeAmount);
         }
     }
-	
-	void Update () {
-	
-	}
 }

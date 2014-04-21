@@ -32,7 +32,7 @@ public class Structure : MonoBehaviour {
 
 	Type type = Type.None;
 
-    public Type GetType()
+    public Type GetStructureType()
     {
         return type;
     }
