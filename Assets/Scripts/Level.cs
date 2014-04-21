@@ -64,7 +64,6 @@ public class Level : MonoBehaviour {
             for (int j = 0; j < Height; j++)
             {
                 _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, (int)(DynamicHeight.MaxHeight * 0.7f));
-                if (j == Height - 1) _tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, (int)(DynamicHeight.MaxHeight * 0.7));
                 _tiles[i][j].GetComponent<Tile>().LavaHeight = 0;
                 _tiles[i][j].GetComponent<Tile>().SetHighlightHeight();
             }

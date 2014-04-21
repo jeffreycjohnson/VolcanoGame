@@ -4,8 +4,8 @@ using System.Collections;
 public class DynamicHeight : MonoBehaviour {
 
 	public bool rotated = false;
-    public const int MaxHeight = 10;
-    public const float DeltaHeight = 0.22f;
+    public const int MaxHeight = 12;
+    public const float DeltaHeight = 0.24f;
 
     int _height = 0;
     Vector3 _lowestposition;
@@ -18,12 +18,18 @@ public class DynamicHeight : MonoBehaviour {
 
 	void Start () {
         _lowestposition = gameObject.transform.position;
-		if(!rotated) {
+		if (!rotated)
+        {
         	_deltaposition = gameObject.transform.rotation * new Vector3(0, -1, 0) * DeltaHeight;
 		}
-		else {
+		else
+        {
 			_deltaposition = gameObject.transform.rotation * new Vector3(0, 0, 1) * DeltaHeight;
 		}
+        //float d = (gameObject.transform.localScale.x - 3.77f - 1.5f) * 0.01f;
+        //float d = gameObject.transform.localScale.x / (6.06f - 1.48f) + (1 - (1.48f / (6.06f - 1.48f)));
+        //_deltaposition += new Vector3(d, d, d);
+        //_deltaposition *= d;
         _originalcolor = gameObject.renderer.material.color - DarkenOriginalConstant * _deltawhite;
 	}
 

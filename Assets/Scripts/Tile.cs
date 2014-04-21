@@ -67,6 +67,7 @@ public class Tile : MonoBehaviour
       }
       set
       {
+          if (value > DynamicHeight.MaxHeight / 2) value = DynamicHeight.MaxHeight / 2;
           getChild(ChildNames.Lava).GetComponent<DynamicHeight>().Height = value + GroundHeight;
       }
   }
@@ -87,6 +88,16 @@ public class Tile : MonoBehaviour
     _x = x;
     _y = y;
   }
+
+  /*public int GetX()
+  {
+      return _x;
+  }
+
+  public int GetY()
+  {
+      return _y;
+  }*/
 
   private void SetLevel(GameObject level)
   {
@@ -129,57 +140,49 @@ public class Tile : MonoBehaviour
       Tile right = _level.GetComponent<Level>()._tiles[rightx][_y].GetComponent<Tile>();
       Tile left = _level.GetComponent<Level>()._tiles[leftx][_y].GetComponent<Tile>();
 
-      int bottomheightdiff = TotalHeight() - bottom.GroundHeight;
-      int bottomleftheightdiff = TotalHeight() - bottomleft.GroundHeight;
-      int bottomrightheightdiff = TotalHeight() - bottomright.GroundHeight;
-      int leftheightdiff = TotalHeight() - left.GroundHeight;
-      int rightheightdiff = TotalHeight() - right.GroundHeight;
+      if (bottom.HasWall())
+      {
+          bottom.getChild(Tile.ChildNames.Structure).GetComponent<Structure>().Hurt(1);
+      }
 
       int deposited = 0;
       while (LavaHeight > 0 && deposited < maxdepositallowed)
       {
           int depositedstart = deposited;
-          int cutoff = 0;
-          bool bottomokay = bottomheightdiff > cutoff && bottom.TotalHeight() < DynamicHeight.MaxHeight;
-          bool bottomrightokay = bottomrightheightdiff > cutoff && bottomright.TotalHeight() < DynamicHeight.MaxHeight;
-          bool bottomleftokay = bottomleftheightdiff > cutoff && bottomleft.TotalHeight() < DynamicHeight.MaxHeight;
-          bool rightokay = rightheightdiff > cutoff && right.TotalHeight() < DynamicHeight.MaxHeight;
-          bool leftokay = leftheightdiff > cutoff && left.TotalHeight() < DynamicHeight.MaxHeight;
-
-          if (bottomokay)
+          if (TileOkay(bottom, -1))
           {
               LavaHeight -= 1;
               bottom.LavaHeight += 1;
               deposited++;
           }
           if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
-          if (bottomrightokay && rightokay)
+          if (TileOkay(bottomright, 1) && TileOkay(right, 1))
           {
               LavaHeight -= 1;
               bottomright.LavaHeight += 1;
               deposited++;
           }
           if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
-          if (bottomleftokay && leftokay)
+          if (TileOkay(bottomleft, 1) && TileOkay(left, 1))
           {
               LavaHeight -= 1;
               bottomleft.LavaHeight += 1;
               deposited++;
           }
           if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
-          /*if (rightokay)
+          if (TileOkay(right, 1))
           {
               LavaHeight -= 1;
               right.LavaHeight += 1;
               deposited++;
           }
           if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
-          if (leftokay)
+          if (TileOkay(left, 1))
           {
               LavaHeight -= 1;
               left.LavaHeight += 1;
               deposited++;
-          }*/
+          }
           if (deposited == depositedstart) break;
       }
 
@@ -189,6 +192,17 @@ public class Tile : MonoBehaviour
           GroundHeight += 1;
       }
    }
+
+  private bool HasWall()
+  {
+      return getChild(ChildNames.Structure).GetComponent<Structure>().GetType() == Structure.Type.Wall;
+  }
+
+  private bool TileOkay(Tile other, int cutoff)
+  {
+      int heightdiff = TotalHeight() - other.GroundHeight;
+      return heightdiff > cutoff && other.TotalHeight() < DynamicHeight.MaxHeight && !other.HasWall();
+  }
 
   private bool _highlighted = false;
   public bool highlighted
