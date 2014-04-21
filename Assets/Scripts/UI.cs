@@ -11,6 +11,11 @@ public class UI : MonoBehaviour {
 	public Texture2D B;
 	public Texture2D X;
 	public Texture2D Y;
+	
+	public Texture2D K1;
+	public Texture2D K2;
+	public Texture2D K3;
+	public Texture2D K4;
 
 	private GameObject clicked;
 
@@ -29,10 +34,10 @@ public class UI : MonoBehaviour {
 		}
 		if(Input.GetJoystickNames().Length == 0) {
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
-			GUI.Label(new Rect(55, 42, 20, 40), "1");
-			GUI.Label(new Rect(55, 152, 20, 40), "2");
-			GUI.Label(new Rect(55, 262, 20, 40), "3");
-			GUI.Label(new Rect(55, 372, 20, 40), "4");
+			GUI.Label(new Rect(15, 12, 96, 96), K1);
+			GUI.Label(new Rect(15, 122, 96, 96), K2);
+			GUI.Label(new Rect(15, 232, 96, 96), K3);
+			GUI.Label(new Rect(15, 342, 96, 96), K4);
 #endif
 		}
 		else {
