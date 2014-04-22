@@ -14,7 +14,7 @@ public class Level : MonoBehaviour {
 
     public static int LevelWidth = 25; // note: change these too!
     public static int LevelHeight = 20;
-    public float MoneyPerUpdate = 0.05f;
+    public float MoneyPerUpdate = 4f;
 
 	void Start ()
     {
@@ -80,7 +80,7 @@ public class Level : MonoBehaviour {
 
 	void Update ()
     {
-        State.money += MoneyPerUpdate;
+        State.money += MoneyPerUpdate * Time.deltaTime;
 	}
 
     float RadiansToDegrees(float rad)

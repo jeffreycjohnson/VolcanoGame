@@ -56,14 +56,10 @@ public class Structure : MonoBehaviour {
 		}
 
 		switch(type) {
-		case Type.Building:
-			//State.money += .03f;
-			break;
 		case Type.Generator:
 			if(transform.parent.GetComponent<Tile>().HasLava) {
-				State.money += .3f;
+				State.money += 15f * Time.deltaTime;
 			}
-			//State.money += .003f;
 			break;
 		case Type.Wall:
             if (_health <= 0 && !dying)
@@ -71,10 +67,10 @@ public class Structure : MonoBehaviour {
                 StartCoroutine(die());
                 _health = Health;
             }
-			//State.money += .003f;
+			break;
+		case Type.Building:
 			break;
 		case Type.None:
-			//State.money += .003f;
 			break;
 		}
 	}

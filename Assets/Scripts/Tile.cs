@@ -86,10 +86,6 @@ public class Tile : MonoBehaviour
     _level = level;
   }
 
-  public void TickUpdate()
-  {
-  }
-
   public void PatrickFlowIn(int amount)
   {
       if (GroundHeight + LavaHeight < DynamicHeight.MaxHeight)

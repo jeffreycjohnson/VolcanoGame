@@ -1573,7 +1573,7 @@ MonoBehaviour:
   volcanoheight: 25
   volcanoradius: 20
   volcanotopradius: 5
-  MoneyPerUpdate: .200000003
+  MoneyPerUpdate: 5
 --- !u!4 &1242254783
 Transform:
   m_ObjectHideFlags: 0
