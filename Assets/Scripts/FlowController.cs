@@ -35,7 +35,7 @@ public class FlowController : MonoBehaviour {
         _level = level;
     }
 	
-	void Update ()
+	void FixedUpdate ()
     {
         _count++;
         if (_count == _flowdelta || Input.GetKeyDown(KeyCode.Space))
