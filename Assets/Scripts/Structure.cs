@@ -42,22 +42,41 @@ public class Structure : MonoBehaviour {
         _health = Health;
     }
 
+	private bool hasBuilding {
+		get {
+			int realX = transform.parent.GetComponent<Tile>()._x;
+			int realY = transform.parent.GetComponent<Tile>()._y;
+			for(int x = -2; x <= 2; x++) {
+				for(int y = -2; y <= 2; y++) {
+					if(realY + y >= Level.LevelHeight || realY + y < 0) {
+						continue;
+					}
+					if(transform.parent.parent.GetComponent<Level>().GetTile((x + realX) % Level.LevelWidth, y + realY).
+					   transform.FindChild("Structure").GetComponent<Structure>().type == Type.Building) {
+						return true;
+					}
+				}
+			}
+			return false;
+		}
+	}
+
 	void Update () {
 		if(transform.parent.GetComponent<Tile>().HasLava && !dying) {
-			if(type == Type.Generator) {
+			if(type == Type.Generator && hasBuilding) {
 				child.particleSystem.Play();
 			}
 			else {
 				StartCoroutine("die");
 			}
 		}
-		else if(type == Type.Generator) {
+		if((!transform.parent.GetComponent<Tile>().HasLava || !hasBuilding || dying) && type == Type.Generator) {
 			child.particleSystem.Stop();
 		}
 
 		switch(type) {
 		case Type.Generator:
-			if(transform.parent.GetComponent<Tile>().HasLava) {
+			if(transform.parent.GetComponent<Tile>().HasLava && hasBuilding) {
 				State.money += 15f * Time.deltaTime;
 			}
 			break;
