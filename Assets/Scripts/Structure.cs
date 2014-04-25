@@ -8,6 +8,8 @@ public class Structure : MonoBehaviour {
 	public Material generatorMaterial;
 	public Mesh wallModel;
 	public Material wallMaterial;
+	public Mesh baseModel;
+	public Material baseMaterial;
 
 	public int buildingCost = 200;
     public int generatorCost = 500;
@@ -27,7 +29,8 @@ public class Structure : MonoBehaviour {
 		None,
 		Building,
 		Generator,
-		Wall
+		Wall,
+		Base
 	}
 
 	Type type = Type.None;
@@ -66,21 +69,22 @@ public class Structure : MonoBehaviour {
 			if(type == Type.Generator && hasBuilding) {
 				child.particleSystem.Play();
 			}
-			else {
+			else if(type == Type.Building || type == Type.Wall || type == Type.Base) {
 				StartCoroutine("die");
 			}
 		}
-		if((!transform.parent.GetComponent<Tile>().HasLava || !hasBuilding || dying) && type == Type.Generator) {
+		if(type == Type.Generator && (!transform.parent.GetComponent<Tile>().HasLava || !hasBuilding || dying)) {
 			child.particleSystem.Stop();
 		}
-
 		switch(type) {
 		case Type.Generator:
 			if(transform.parent.GetComponent<Tile>().HasLava && hasBuilding) {
 				State.money += 15f * Time.deltaTime;
 			}
 			break;
+		case Type.Base:
 		case Type.Wall:
+			Debug.Log(_health);
             if (_health <= 0 && !dying)
             {
                 StartCoroutine(die());
@@ -88,7 +92,6 @@ public class Structure : MonoBehaviour {
             }
 			break;
 		case Type.Building:
-			break;
 		case Type.None:
 			break;
 		}
@@ -96,23 +99,16 @@ public class Structure : MonoBehaviour {
 
 	IEnumerator die()
 	{
-		float time;
-		switch(type) {
-		case Type.Building:
-			time = 1.75f;
-			break;
-		case Type.Wall:
-			time = 1.75f;
-			break;
-		default:
-			yield break;
-		}
+		float time = 1.75f;
 		dying = true;
 		Destroy(Instantiate(fire.gameObject, transform.position, transform.rotation), time);
 		yield return new WaitForSeconds(time);
 		Destroy(Instantiate(explosion.gameObject, transform.position, transform.rotation), 1);
 		Handheld.Vibrate();
 		renderer.enabled = false;
+		if(type == Type.Base) {
+			State.defeated = true;
+		}
 		type = Type.None;
 		dying = false;
 	}
@@ -163,6 +159,14 @@ public class Structure : MonoBehaviour {
 		type = Type.Wall;
 	}
 
+	public void buildBase()
+	{
+		renderer.material = baseMaterial;
+		GetComponent<MeshFilter>().mesh = baseModel;
+		renderer.enabled = true;
+		type = Type.Base;
+	}
+	
     public void Hurt(int amount)
     {
         if (dying) return;

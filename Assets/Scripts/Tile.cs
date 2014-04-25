@@ -118,7 +118,7 @@ public class Tile : MonoBehaviour
       Tile right = _level.GetComponent<Level>()._tiles[rightx][_y].GetComponent<Tile>();
       Tile left = _level.GetComponent<Level>()._tiles[leftx][_y].GetComponent<Tile>();
 
-      if (bottom.HasWall())
+      if (bottom.HasWall() || bottom.HasBase())
       {
           bottom.getChild(Tile.ChildNames.Structure).GetComponent<Structure>().Hurt(1);
       }
@@ -170,17 +170,23 @@ public class Tile : MonoBehaviour
           LavaHeight -= 1;
           GroundHeight += 2;
       }
-   }
+	}
+	
+	private bool HasWall()
+	{
+		return getChild(ChildNames.Structure).GetComponent<Structure>().GetStructureType() == Structure.Type.Wall;
+	}
+	
+	
+	private bool HasBase()
+	{
+		return getChild(ChildNames.Structure).GetComponent<Structure>().GetStructureType() == Structure.Type.Base;
+	}
 
-  private bool HasWall()
-  {
-      return getChild(ChildNames.Structure).GetComponent<Structure>().GetStructureType() == Structure.Type.Wall;
-  }
-
-  private bool TileOkay(Tile other, int cutoff)
+	private bool TileOkay(Tile other, int cutoff)
   {
       int heightdiff = TotalHeight() - other.GroundHeight;
-      return heightdiff > cutoff && other.TotalHeight() < DynamicHeight.MaxHeight && !other.HasWall();
+      return heightdiff > cutoff && other.TotalHeight() < DynamicHeight.MaxHeight && !other.HasWall() && !other.HasBase();
   }
 
   private bool _highlighted = false;

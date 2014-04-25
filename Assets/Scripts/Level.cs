@@ -52,6 +52,7 @@ public class Level : MonoBehaviour {
             tiley += (volcanoheight / Height) * scalar / 2;
             radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.47f);
         }
+		_tiles[19][0].transform.FindChild("Structure").GetComponent<Structure>().buildBase();
 
         StartCoroutine(RandomizeGround());
 	}
