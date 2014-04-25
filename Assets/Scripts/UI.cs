@@ -24,6 +24,11 @@ public class UI : MonoBehaviour {
 	}
 
 	void OnGUI() {
+		if(State.defeated) {
+			GUI.skin.label.fontSize = 64;
+			GUI.Label(new Rect(Screen.width / 2 - 128, Screen.height / 2 - 32, Screen.width / 2, 64), "You Lose");
+			return;
+		}
 		GUI.skin.label.fontSize = 24;
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
 		int size = 100;
@@ -63,6 +68,9 @@ public class UI : MonoBehaviour {
 	}
 
 	void Update() {
+		if(State.defeated) {
+			return;
+		}
 		if(Input.GetButtonDown("A")) {
 			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
 		}
