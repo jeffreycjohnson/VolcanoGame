@@ -388,7 +388,6 @@ MonoBehaviour:
   Wall: {fileID: 2800000, guid: 79c254d862cf7aa44b7de3f64e416b5f, type: 3}
   Generator: {fileID: 2800000, guid: 77729f86eea67c4429856fefd2186608, type: 3}
   Dig: {fileID: 2800000, guid: 6ac52575e16f85c42b978aeb2cdacfb5, type: 3}
-  level: {fileID: 1242254783}
   A: {fileID: 2800000, guid: 02a9a088eeba62f42b301e2fac59985c, type: 3}
   B: {fileID: 2800000, guid: 97d099abd4fad4a4bb092aa2715d5eee, type: 3}
   X: {fileID: 2800000, guid: 13d63a599244e7f40a15fdb33efe5e1e, type: 3}
@@ -411,6 +410,7 @@ MonoBehaviour:
   level: {fileID: 1242254783}
   friction: .400000006
   maxSpeed: 20
+  velocity: 0
 --- !u!45 &738146381
 Skybox:
   m_ObjectHideFlags: 0

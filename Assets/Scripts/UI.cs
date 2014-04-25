@@ -5,7 +5,6 @@ public class UI : MonoBehaviour {
 	public Texture2D Wall;
 	public Texture2D Generator;
 	public Texture2D Dig;
-	public Transform level;
 	
 	public Texture2D A;
 	public Texture2D B;
@@ -16,8 +15,6 @@ public class UI : MonoBehaviour {
 	public Texture2D K2;
 	public Texture2D K3;
 	public Texture2D K4;
-
-	private GameObject clicked;
 
 	void Start() {
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -36,18 +33,18 @@ public class UI : MonoBehaviour {
 		int size = 200;
 #endif
 		if(GUI.Button(new Rect(10, 10, size, size), Building)) {
-			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
+			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
 		}
 		if(GUI.Button(new Rect(10, 20 + size, size, size), Wall)) {
-			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
+			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
 		}
 		if(GUI.Button(new Rect(10, 30 + size * 2, size, size), Generator)) {
-			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
+			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
 		}
 		if(GUI.Button(new Rect(10, 40 + size * 3, size, size), Dig)) {
-			if (clicked.GetComponent<Tile>().LavaHeight == 0)
+			if (State.selected.GetComponent<Tile>().LavaHeight == 0)
 			{
-				clicked.GetComponent<Tile>().GroundHeight -= 3;
+				State.selected.GetComponent<Tile>().GroundHeight -= 3;
 			}
 		}
 		if(Input.GetJoystickNames().Length == 0) {
@@ -71,34 +68,19 @@ public class UI : MonoBehaviour {
 		if(State.defeated) {
 			return;
 		}
-		if(Input.GetButtonDown("A")) {
-			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
-		}
-		if(Input.GetButtonDown("B")) {
-			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].transform.FindChild("Structure").GetComponent<Structure>().buildWall();
-		}
-		if(Input.GetButtonDown("X")) {
-			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
-		}
-		if(Input.GetButtonDown("Y")) {
-            if (level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().LavaHeight == 0)
-            {
-                level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().GroundHeight -= 3;
-            }
-		}
 		if(Input.GetButtonDown("K1")) {
-			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
+			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
 		}
 		if(Input.GetButtonDown("K2")) {
-			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
+			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildWall();
 		}
 		if(Input.GetButtonDown("K3")) {
-			clicked.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
+			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
 		}
 		if(Input.GetButtonDown("K4")) {
-			if (clicked.GetComponent<Tile>().LavaHeight == 0)
+			if (State.selected.GetComponent<Tile>().LavaHeight == 0)
 			{
-				clicked.GetComponent<Tile>().GroundHeight -= 3;
+				State.selected.GetComponent<Tile>().GroundHeight -= 3;
 			}
 		}
 		if(Input.GetButtonDown("Quit")) {
@@ -107,11 +89,11 @@ public class UI : MonoBehaviour {
 		if(Input.GetKeyDown("mouse 0")) {
 			RaycastHit hit;
 			if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)) {
-				if(clicked != null) {
-					clicked.GetComponent<Tile>().highlighted = false;
+				if(State.selected != null) {
+					State.selected.GetComponent<Tile>().highlighted = false;
 				}
-				clicked = hit.collider.transform.parent.gameObject;
-				clicked.GetComponent<Tile>().highlighted = true;
+				State.selected = hit.collider.transform.parent.gameObject;
+				State.selected.GetComponent<Tile>().highlighted = true;
 			}
 		}
 		for(int i = 0; i < Input.touchCount; i++) {
@@ -119,11 +101,12 @@ public class UI : MonoBehaviour {
 			if(touch.phase == TouchPhase.Began) {
 				RaycastHit hit;
 				if(Physics.Raycast(Camera.main.ScreenPointToRay(touch.position), out hit)) {
-					if(clicked != null) {
-						clicked.GetComponent<Tile>().highlighted = false;
+					if(State.selected != null) {
+						State.selected.GetComponent<Tile>().highlighted = false;
 					}
-					clicked = hit.collider.transform.parent.gameObject;
-					clicked.GetComponent<Tile>().highlighted = true;
+					State.selected = hit.collider.transform.parent.gameObject;
+					State.selected.GetComponent<Tile>().highlighted = true;
+					GetComponent<CameraController>().velocity = 0f;
 				}
 			}
 		}
