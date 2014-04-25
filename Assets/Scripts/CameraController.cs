@@ -2,9 +2,23 @@
 
 public class CameraController : MonoBehaviour {
 	public Transform level;
+	public float friction = .4f;
+	public float maxSpeed = 20f;
+	private float velocity = 0f;
 	private bool started = false;
 
 	void Update () {
+		if(velocity - friction > 0) {
+			velocity -= friction;
+			velocity = System.Math.Min(velocity, maxSpeed);
+		}
+		else if(velocity + friction < 0) {
+			velocity += friction;
+			velocity = System.Math.Max(velocity, -maxSpeed);
+		}
+		else {
+			velocity = 0f;
+		}
 		if(!started) {
 			State.selectedGrid = new Vector2(Level.LevelWidth * 0.772f, 0);
 			started = true;
@@ -27,9 +41,11 @@ public class CameraController : MonoBehaviour {
 			level.GetComponent<Level>()._tiles[(int)State.selectedGrid.x][(int)State.selectedGrid.y].GetComponent<Tile>().highlighted = true;
 		}
 		transform.RotateAround(Vector3.zero, Vector3.up, -Input.GetAxis("Horizontal"));
+		transform.RotateAround(Vector3.zero, Vector3.up, velocity);
 		foreach(Touch touch in Input.touches) {
 			if(touch.phase == TouchPhase.Moved) {
-				transform.RotateAround(Vector3.zero, Vector3.up, touch.deltaPosition.x);
+				velocity = touch.deltaPosition.x * Time.deltaTime * 60;
+				//transform.RotateAround(Vector3.zero, Vector3.up, touch.deltaPosition.x);
 			}
 		}
 	}

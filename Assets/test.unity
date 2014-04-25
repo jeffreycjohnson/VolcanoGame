@@ -409,6 +409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 1242254783}
+  friction: .400000006
+  maxSpeed: 20
 --- !u!45 &738146381
 Skybox:
   m_ObjectHideFlags: 0
