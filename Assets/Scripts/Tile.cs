@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tile : MonoBehaviour
 {
-  private int _x, _y;
+  public int _x, _y;
   private GameObject _level;
   public int maxdepositallowed = 3;
 
