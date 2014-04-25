@@ -101,6 +101,9 @@ public class UI : MonoBehaviour {
 				clicked.GetComponent<Tile>().GroundHeight -= 3;
 			}
 		}
+		if(Input.GetButtonDown("Quit")) {
+			Application.Quit();
+		}
 		if(Input.GetKeyDown("mouse 0")) {
 			RaycastHit hit;
 			if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit)) {
