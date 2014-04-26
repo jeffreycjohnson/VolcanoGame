@@ -59,7 +59,7 @@ public class FlowController : MonoBehaviour {
             }
 			foreach(GameObject tile in _lavasource)
 			{
-            	tile.GetComponent<Tile>().PatrickFlowIn(FlowHeightPerTick);
+            	tile.GetComponent<Tile>().LavaHeight += FlowHeightPerTick;
 			}
             _flowcount++;
             if (_flowcount == _flowtime)

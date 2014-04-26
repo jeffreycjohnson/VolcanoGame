@@ -52,7 +52,6 @@ public class Level : MonoBehaviour {
             tiley += (volcanoheight / Height) * scalar / 2;
             radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.47f);
         }
-		_tiles[19][0].transform.FindChild("Structure").GetComponent<Structure>().buildBase();
 
         StartCoroutine(RandomizeGround());
 	}
@@ -77,6 +76,8 @@ public class Level : MonoBehaviour {
         GameObject controller = (GameObject)Instantiate(FlowController);
         controller.GetComponent<FlowController>().SetLevel(gameObject);
         controller.GetComponent<FlowController>().NewStream();
+
+        _tiles[19][0].transform.FindChild("Structure").GetComponent<Structure>().buildBase();
     }
 
 	void Update ()

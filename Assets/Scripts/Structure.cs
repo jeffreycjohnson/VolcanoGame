@@ -33,16 +33,12 @@ public class Structure : MonoBehaviour {
 		Base
 	}
 
-	Type type = Type.None;
-
-    public Type GetStructureType()
-    {
-        return type;
-    }
+	public Type type { get; private set; }
 
     void Start()
     {
         _health = Health;
+        type = Type.None;
     }
 
 	private bool hasBuilding {
