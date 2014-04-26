@@ -6,11 +6,6 @@ public class UI : MonoBehaviour {
 	public Texture2D Generator;
 	public Texture2D Dig;
 	
-	public Texture2D A;
-	public Texture2D B;
-	public Texture2D X;
-	public Texture2D Y;
-	
 	public Texture2D K1;
 	public Texture2D K2;
 	public Texture2D K3;
@@ -22,11 +17,18 @@ public class UI : MonoBehaviour {
 
 	void OnGUI() {
 		GUI.skin.label.fontSize = 24;
+
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
-		int size = 100;
+        int size = 100;
+        GUI.Label(new Rect(15, 12, 96, 96), K1);
+        GUI.Label(new Rect(15, 122, 96, 96), K2);
+        GUI.Label(new Rect(15, 232, 96, 96), K3);
+        GUI.Label(new Rect(15, 342, 96, 96), K4);
 #else
 		int size = 200;
 #endif
+
+        GUI.Label(new Rect(Screen.width - 200, 25, 200, 50), "Money: " + ((int)State.money).ToString());
 		if(GUI.Button(new Rect(10, 10, size, size), Building)) {
 			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildBuilding();
 		}
@@ -42,21 +44,6 @@ public class UI : MonoBehaviour {
 				State.selected.GetComponent<Tile>().GroundHeight -= 3;
 			}
 		}
-		if(Input.GetJoystickNames().Length == 0) {
-#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
-			GUI.Label(new Rect(15, 12, 96, 96), K1);
-			GUI.Label(new Rect(15, 122, 96, 96), K2);
-			GUI.Label(new Rect(15, 232, 96, 96), K3);
-			GUI.Label(new Rect(15, 342, 96, 96), K4);
-#endif
-		}
-		else {
-			GUI.Label(new Rect(120, 35, 40, 40), A);
-			GUI.Label(new Rect(120, 145, 40, 40),B);
-			GUI.Label(new Rect(120, 255, 40, 40), X);
-			GUI.Label(new Rect(120, 365, 40, 40), Y);
-		}
-		GUI.Label(new Rect(Screen.width - 200, 25, 200, 50), "Money: " + ((int)State.money).ToString());
 	}
 
 	void Update() {
