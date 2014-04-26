@@ -11,8 +11,8 @@ public class Structure : MonoBehaviour {
 	public Mesh baseModel;
 	public Material baseMaterial;
 
-	public int buildingCost = 200;
-    public int generatorCost = 500;
+	public int buildingCost = 1000;
+    public int generatorCost = 400;
 	public int wallCost = 100;
 
 	public Transform fire;
@@ -54,8 +54,9 @@ public class Structure : MonoBehaviour {
 					if(realY + y >= Level.LevelHeight || realY + y < 0) {
 						continue;
 					}
-					if(transform.parent.parent.GetComponent<Level>().GetTile((x + realX) % Level.LevelWidth, y + realY).
-					   transform.FindChild("Structure").GetComponent<Structure>().type == Type.Building) {
+                    Type tileType = transform.parent.parent.GetComponent<Level>().GetTile((x + realX) % Level.LevelWidth, y + realY).
+                        transform.FindChild("Structure").GetComponent<Structure>().type;
+					if(tileType == Type.Building || tileType == Type.Base) {
 						return true;
 					}
 				}
@@ -84,7 +85,6 @@ public class Structure : MonoBehaviour {
 			break;
 		case Type.Base:
 		case Type.Wall:
-			Debug.Log(_health);
             if (_health <= 0 && !dying)
             {
                 StartCoroutine(die());

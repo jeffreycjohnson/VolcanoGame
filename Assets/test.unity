@@ -396,6 +396,7 @@ MonoBehaviour:
   K2: {fileID: 2800000, guid: 21ea033bc33ee2840ad2991b997c6665, type: 3}
   K3: {fileID: 2800000, guid: e625bb147cb739942adc6fb74f0579d5, type: 3}
   K4: {fileID: 2800000, guid: d382018e797bc6d41aea432c979dc63c, type: 3}
+  digCost: 50
 --- !u!114 &738146380
 MonoBehaviour:
   m_ObjectHideFlags: 0

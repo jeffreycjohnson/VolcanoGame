@@ -321,9 +321,9 @@ MonoBehaviour:
   wallMaterial: {fileID: 2100000, guid: fab9257c9d3b8ee49acbcfa34ed0a1a8, type: 2}
   baseModel: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
   baseMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  buildingCost: 200
-  generatorCost: 200
-  wallCost: 20
+  buildingCost: 1000
+  generatorCost: 400
+  wallCost: 100
   fire: {fileID: 400000, guid: 948753746becca5489aa971568228665, type: 2}
   explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
   smallexplosion: {fileID: 400000, guid: 633e763395b4e034e91ee3bae665aa08, type: 2}

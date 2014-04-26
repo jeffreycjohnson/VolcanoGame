@@ -16,6 +16,8 @@ public class UI : MonoBehaviour {
 	public Texture2D K3;
 	public Texture2D K4;
 
+    public int digCost = 50;
+
 	void Start() {
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 	}
@@ -42,8 +44,9 @@ public class UI : MonoBehaviour {
 			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
 		}
 		if(GUI.Button(new Rect(10, 40 + size * 3, size, size), Dig)) {
-			if (State.selected.GetComponent<Tile>().LavaHeight == 0)
+			if (State.selected.GetComponent<Tile>().LavaHeight == 0 && State.money > digCost)
 			{
+                State.money -= digCost;
 				State.selected.GetComponent<Tile>().GroundHeight -= 3;
 			}
 		}
@@ -78,8 +81,9 @@ public class UI : MonoBehaviour {
 			State.selected.transform.FindChild("Structure").GetComponent<Structure>().buildGenerator();
 		}
 		if(Input.GetButtonDown("K4")) {
-			if (State.selected.GetComponent<Tile>().LavaHeight == 0)
-			{
+            if (State.selected.GetComponent<Tile>().LavaHeight == 0 && State.money > digCost)
+            {
+                State.money -= digCost;
 				State.selected.GetComponent<Tile>().GroundHeight -= 3;
 			}
 		}
