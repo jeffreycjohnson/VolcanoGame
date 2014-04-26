@@ -30,16 +30,12 @@ public class Structure : MonoBehaviour {
 		Wall
 	}
 
-	Type type = Type.None;
-
-    public Type GetStructureType()
-    {
-        return type;
-    }
+	public Type type { get; private set; }
 
     void Start()
     {
         _health = Health;
+        type = Type.None;
     }
 
 	void Update () {
