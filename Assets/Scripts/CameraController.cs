@@ -71,5 +71,9 @@ public class CameraController : MonoBehaviour {
 				velocity = touch.deltaPosition.x * Time.deltaTime * 60;
 			}
 		}
+        if(Input.GetKey("mouse 0"))
+        {
+            velocity = Input.GetAxis("Mouse X") * Time.deltaTime * 120;
+        }
 	}
 }
