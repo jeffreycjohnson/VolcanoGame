@@ -17,6 +17,7 @@ public class FlowController : MonoBehaviour {
     int _flowtime = 0;
     List<GameObject> _lavasource = new List<GameObject>();
     bool[][] _hadlava;
+    private int _difficulty = 15;
 
 	void Start ()
     {
@@ -67,7 +68,10 @@ public class FlowController : MonoBehaviour {
                 _flowcount = 0;
                 _flowtime = Random.Range(MinFlowTime, MaxFlowTime);
 				_lavasource.Clear();
-                NewStream();
+                for (int i = 0; i <= (_difficulty - 10) / 10; i++)
+                {
+                    NewStream();
+                }
             }
         }
 	}
@@ -76,13 +80,14 @@ public class FlowController : MonoBehaviour {
 	{
 		while(true)
 		{
-			yield return new WaitForSeconds(60);
+			yield return new WaitForSeconds(75 - _difficulty);
 			_flowcount = 0;
 			_flowtime = Random.Range(MinFlowTime, MaxFlowTime);
-			for(int i = 0; i < 6; i++)
+			for(int i = 0; i < _difficulty / 3; i++)
 			{
 				NewStream();
 			}
+            _difficulty++;
 		}
 	}
 
