@@ -88,7 +88,9 @@ public class Structure : MonoBehaviour {
 		Destroy(Instantiate(fire.gameObject, transform.position, transform.rotation), time);
 		yield return new WaitForSeconds(time);
 		Destroy(Instantiate(explosion.gameObject, transform.position, transform.rotation), 1);
+#if !(UNITY_STANDALONE || UNITY_WEBPLAYER)
 		Handheld.Vibrate();
+#endif
 		renderer.enabled = false;
 		type = Type.None;
 		dying = false;
