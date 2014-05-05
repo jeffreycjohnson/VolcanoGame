@@ -72,6 +72,10 @@ public class FlowController : MonoBehaviour {
                 {
                     NewStream();
                 }
+                if(Random.Range(0, _difficulty) >= 15)
+                {
+                    NewStream(Random.Range(0, Level.LevelHeight - 1));
+                }
             }
         }
 	}
@@ -91,11 +95,12 @@ public class FlowController : MonoBehaviour {
 		}
 	}
 
-    public void NewStream()
+    public void NewStream(int height = -1)
     {
+        height = height >= 0 ? height : Level.LevelHeight - 1;
         // todo: make this random distribution more uniform. most important RNG.
         // TODO TODO TODO
-        GameObject tile = _level.GetComponent<Level>()._tiles[Random.Range(0, Level.LevelWidth - 1)][Level.LevelHeight - 1];
+        GameObject tile = _level.GetComponent<Level>()._tiles[Random.Range(0, Level.LevelWidth - 1)][height];
         tile.GetComponent<Tile>().GroundHeight = 2;
         tile.GetComponent<Tile>().LavaHeight = FlowHeightPerTick;
         _lavasource.Add(tile);
