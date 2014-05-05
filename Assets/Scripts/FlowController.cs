@@ -25,10 +25,10 @@ public class FlowController : MonoBehaviour {
     {
         _flowdelta = Random.Range(MinFlowDelta, MaxFlowDelta);
         _flowtime = Random.Range(MinFlowTime, MaxFlowTime);
-        _hadlava = new bool[Level.LevelWidth][];
-        for (int x = 0; x < Level.LevelWidth; x++)
+        _hadlava = new bool[State.level.LevelWidth][];
+        for (int x = 0; x < State.level.LevelWidth; x++)
         {
-            _hadlava[x] = new bool[Level.LevelHeight];
+            _hadlava[x] = new bool[State.level.LevelHeight];
         }
 		StartCoroutine("Eruption");
 	}
@@ -46,16 +46,16 @@ public class FlowController : MonoBehaviour {
             _count = 0;
             _flowdelta = Random.Range(MinFlowDelta, MaxFlowDelta);
             // tick all lava, and then flow in more from the stream source.
-            for (int y = 0; y < Level.LevelHeight; y++)
+            for (int y = 0; y < State.level.LevelHeight; y++)
             {
-              for (int x = 0; x < Level.LevelWidth; x++)
+                for (int x = 0; x < State.level.LevelWidth; x++)
                 {
                     _hadlava[x][y] = _level.GetComponent<Level>()._tiles[x][y].GetComponent<Tile>().HasLava;
                 }
             }
-            for (int y = 0; y < Level.LevelHeight; y++)
+            for (int y = 0; y < State.level.LevelHeight; y++)
             {
-                for (int x = 0; x < Level.LevelWidth; x++)
+                for (int x = 0; x < State.level.LevelWidth; x++)
                 {
                     if (_hadlava[x][y]) _level.GetComponent<Level>()._tiles[x][y].GetComponent<Tile>().TrickleDown();
                 }
@@ -77,7 +77,7 @@ public class FlowController : MonoBehaviour {
                 }
                 if(Random.Range(0, _difficulty) >= 15)
                 {
-                    NewStream(Random.Range(0, Level.LevelHeight - 1));
+                    NewStream(Random.Range(0, State.level.LevelHeight - 1));
                 }
             }
         }
@@ -101,11 +101,11 @@ public class FlowController : MonoBehaviour {
 
     public void NewStream(int height = -1)
     {
-        height = height >= 0 ? height : Level.LevelHeight - 1;
+        height = height >= 0 ? height : State.level.LevelHeight - 1;
         // todo: make this random distribution more uniform. most important RNG.
         // TODO TODO TODO
-        GameObject tile = _level.GetComponent<Level>()._tiles[Random.Range(0, Level.LevelWidth - 1)][height];
-        if (height != Level.LevelHeight - 1)
+        GameObject tile = _level.GetComponent<Level>()._tiles[Random.Range(0, State.level.LevelWidth - 1)][height];
+        if (height != State.level.LevelHeight - 1)
         {
             Destroy(Instantiate(erruption.gameObject, tile.transform.FindChild("Structure").position, tile.transform.FindChild("Structure").rotation), _flowtime);
         }

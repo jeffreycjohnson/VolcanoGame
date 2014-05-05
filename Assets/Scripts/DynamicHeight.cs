@@ -6,12 +6,12 @@ public class DynamicHeight : MonoBehaviour {
     public const int MaxHeight = 12;
     public const float DeltaHeight = 0.24f;
 
-    int _height = 0;
-    Vector3 _lowestposition;
-    Vector3 _deltaposition;
-    public Color _originalcolor = Color.grey;
-    public Color _topcolor = Color.white;
-    public float FadeAmount = 2f;
+    private int _height = 0;
+    private Vector3 _lowestposition;
+    private Vector3 _deltaposition;
+    private Color _originalcolor = Color.grey;
+    private Color _topcolor = Color.white;
+    private float _fadeamount = 2f;
 
 	void Start () {
         _lowestposition = gameObject.transform.position;
@@ -33,7 +33,7 @@ public class DynamicHeight : MonoBehaviour {
             _height = Mathf.Clamp(value, 0, MaxHeight);
             //if (value < 0 || value > MaxHeight) Debug.Log("DynamicHeight being set too high or low. Clamped.");
             gameObject.transform.position = _lowestposition + (float)Height * _deltaposition;
-            gameObject.renderer.material.color = _originalcolor + (float)Height / (float)MaxHeight * ((_topcolor - _originalcolor) * FadeAmount);
+            gameObject.renderer.material.color = _originalcolor + (float)Height / (float)MaxHeight * ((_topcolor - _originalcolor) * _fadeamount);
         }
     }
 }

@@ -396,7 +396,7 @@ MonoBehaviour:
   K2: {fileID: 2800000, guid: 21ea033bc33ee2840ad2991b997c6665, type: 3}
   K3: {fileID: 2800000, guid: e625bb147cb739942adc6fb74f0579d5, type: 3}
   K4: {fileID: 2800000, guid: d382018e797bc6d41aea432c979dc63c, type: 3}
-  digCost: 50
+  DigCost: 50
 --- !u!114 &738146380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,9 +409,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 1242254783}
-  friction: .400000006
-  maxSpeed: 20
-  velocity: 0
+  Friction: .400000006
+  MaxSpeed: 20
+  Velocity: 0
 --- !u!45 &738146381
 Skybox:
   m_ObjectHideFlags: 0
@@ -1571,8 +1571,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TileTemplate: {fileID: 100006, guid: b5fbe0a1775b48f4cb8da0f1c85c7866, type: 2}
   FlowController: {fileID: 100000, guid: 4ddb48ef108a84042a33fc9537f42fe9, type: 2}
-  Width: 25
-  Height: 15
+  LevelWidth: 25
+  LevelHeight: 15
   volcanoheight: 25
   volcanoradius: 20
   volcanotopradius: 5

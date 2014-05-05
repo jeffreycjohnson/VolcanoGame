@@ -2,26 +2,26 @@
 using System.Collections;
 
 public class Structure : MonoBehaviour {
-	public Mesh buildingModel;
-	public Material buildingMaterial;
-	public Mesh generatorModel;
-	public Material generatorMaterial;
-	public Mesh wallModel;
-	public Material wallMaterial;
-	public Mesh baseModel;
-	public Material baseMaterial;
+	public Mesh BuildingModel;
+	public Material BuildingMaterial;
+	public Mesh GeneratorModel;
+	public Material GeneratorMaterial;
+	public Mesh WallModel;
+	public Material WallMaterial;
+	public Mesh BaseModel;
+	public Material BaseMaterial;
 
-	public int buildingCost = 1000;
-    public int generatorCost = 400;
-	public int wallCost = 100;
+	public int BuildingCost = 1000;
+    public int GeneratorCost = 400;
+	public int WallCost = 100;
 
-	public Transform fire;
-	public Transform explosion;
-    public Transform smallexplosion;
-	public Transform generatorRunning;
+	public Transform Fire;
+	public Transform Explosion;
+    public Transform SmallExplosion;
+	public Transform GeneratorRunning;
 
-	private bool dying = false;
-	private GameObject child;
+	private bool _dying = false;
+	private GameObject _child;
     public int Health = 15;
     private int _health = 0;
 
@@ -43,14 +43,15 @@ public class Structure : MonoBehaviour {
 
 	private bool hasBuilding {
 		get {
-			int realX = transform.parent.GetComponent<Tile>()._x;
-			int realY = transform.parent.GetComponent<Tile>()._y;
+			int realX = transform.parent.GetComponent<Tile>().X;
+			int realY = transform.parent.GetComponent<Tile>().Y;
 			for(int x = -2; x <= 2; x++) {
 				for(int y = -2; y <= 2; y++) {
-					if(realY + y >= Level.LevelHeight || realY + y < 0) {
+                    if (realY + y >= State.level.LevelHeight || realY + y < 0)
+                    {
 						continue;
 					}
-                    Type tileType = transform.parent.parent.GetComponent<Level>().GetTile((x + realX) % Level.LevelWidth, y + realY).
+                    Type tileType = transform.parent.parent.GetComponent<Level>().GetTile((x + realX) % State.level.LevelWidth, y + realY).
                         transform.FindChild("Structure").GetComponent<Structure>().type;
 					if(tileType == Type.Building || tileType == Type.Base) {
 						return true;
@@ -62,16 +63,16 @@ public class Structure : MonoBehaviour {
 	}
 
 	void Update () {
-		if(transform.parent.GetComponent<Tile>().HasLava && !dying) {
+		if(transform.parent.GetComponent<Tile>().HasLava && !_dying) {
 			if(type == Type.Generator && hasBuilding) {
-				child.particleSystem.Play();
+				_child.particleSystem.Play();
 			}
 			else if(type == Type.Building || type == Type.Wall || type == Type.Base) {
 				StartCoroutine("die");
 			}
 		}
-		if(type == Type.Generator && (!transform.parent.GetComponent<Tile>().HasLava || !hasBuilding || dying)) {
-			child.particleSystem.Stop();
+		if(type == Type.Generator && (!transform.parent.GetComponent<Tile>().HasLava || !hasBuilding || _dying)) {
+			_child.particleSystem.Stop();
 		}
 		switch(type) {
 		case Type.Generator:
@@ -81,7 +82,7 @@ public class Structure : MonoBehaviour {
 			break;
 		case Type.Base:
 		case Type.Wall:
-            if (_health <= 0 && !dying)
+            if (_health <= 0 && !_dying)
             {
                 StartCoroutine(die());
                 _health = Health;
@@ -96,10 +97,10 @@ public class Structure : MonoBehaviour {
 	IEnumerator die()
 	{
 		float time = 1.75f;
-		dying = true;
-		Destroy(Instantiate(fire.gameObject, transform.position, transform.rotation), time);
+		_dying = true;
+		Destroy(Instantiate(Fire.gameObject, transform.position, transform.rotation), time);
 		yield return new WaitForSeconds(time);
-		Destroy(Instantiate(explosion.gameObject, transform.position, transform.rotation), 1);
+		Destroy(Instantiate(Explosion.gameObject, transform.position, transform.rotation), 1);
 #if !(UNITY_STANDALONE || UNITY_WEBPLAYER)
 		Handheld.Vibrate();
 #endif
@@ -108,18 +109,18 @@ public class Structure : MonoBehaviour {
 			State.defeated = true;
 		}
 		type = Type.None;
-		dying = false;
+		_dying = false;
 	}
 
 	public void buildBuilding(bool free = false) {
         if (type != Type.None || transform.parent.GetComponent<Tile>().HasLava) return;
         if (!free)
         {
-            if (State.money < buildingCost) return;
-            State.money -= buildingCost;
+            if (State.money < BuildingCost) return;
+            State.money -= BuildingCost;
         }
-		renderer.material = buildingMaterial;
-		GetComponent<MeshFilter>().mesh = buildingModel;
+		renderer.material = BuildingMaterial;
+		GetComponent<MeshFilter>().mesh = BuildingModel;
 		renderer.enabled = true;
 		type = Type.Building;
 	}
@@ -129,17 +130,17 @@ public class Structure : MonoBehaviour {
         if (type != Type.None || transform.parent.GetComponent<Tile>().HasLava) return;
         if (!free)
         {
-            if (State.money < generatorCost) return;
-            State.money -= generatorCost;
+            if (State.money < GeneratorCost) return;
+            State.money -= GeneratorCost;
         }
-		renderer.material = generatorMaterial;
-		GetComponent<MeshFilter>().mesh = generatorModel;
+		renderer.material = GeneratorMaterial;
+		GetComponent<MeshFilter>().mesh = GeneratorModel;
 		renderer.enabled = true;
 		type = Type.Generator;
-		child = Instantiate(generatorRunning.gameObject, transform.position, transform.rotation) as GameObject;
-		child.transform.parent = transform;
-		child.particleSystem.Stop();
-		child.particleSystem.Clear();
+		_child = Instantiate(GeneratorRunning.gameObject, transform.position, transform.rotation) as GameObject;
+		_child.transform.parent = transform;
+		_child.particleSystem.Stop();
+		_child.particleSystem.Clear();
 	}
 
     public void buildWall(bool free = false)
@@ -147,28 +148,28 @@ public class Structure : MonoBehaviour {
         if (type != Type.None || transform.parent.GetComponent<Tile>().HasLava) return;
         if (!free)
         {
-            if (State.money < wallCost) return;
-            State.money -= wallCost;
+            if (State.money < WallCost) return;
+            State.money -= WallCost;
         }
         
-		renderer.material = wallMaterial;
-		GetComponent<MeshFilter>().mesh = wallModel;
+		renderer.material = WallMaterial;
+		GetComponent<MeshFilter>().mesh = WallModel;
 		renderer.enabled = true;
 		type = Type.Wall;
 	}
 
 	public void buildBase()
 	{
-		renderer.material = baseMaterial;
-		GetComponent<MeshFilter>().mesh = baseModel;
+		renderer.material = BaseMaterial;
+		GetComponent<MeshFilter>().mesh = BaseModel;
 		renderer.enabled = true;
 		type = Type.Base;
 	}
 	
     public void Hurt(int amount)
     {
-        if (dying) return;
+        if (_dying) return;
         _health -= amount;
-        if (!dying) Destroy(Instantiate(smallexplosion.gameObject, transform.position, transform.rotation), 1);
+        if (!_dying) Destroy(Instantiate(SmallExplosion.gameObject, transform.position, transform.rotation), 1);
     }
 }

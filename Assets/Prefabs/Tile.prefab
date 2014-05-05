@@ -284,7 +284,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acac9c80a8cc7f74e80ef1d39b4fb6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxdepositallowed: 4
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -297,9 +296,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
-  _originalcolor: {r: .345588207, g: .345588207, b: .345588207, a: 0}
-  _topcolor: {r: 1, g: 1, b: 1, a: 1}
-  FadeAmount: 3
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,21 +307,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82478de8b8a2a246ad3ccfafbe995f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingModel: {fileID: 4300000, guid: e575cedddba8db94aa39295681c6048c, type: 3}
-  buildingMaterial: {fileID: 2100000, guid: 1adfabffbfb9fec43856f2a3bc79cb09, type: 2}
-  generatorModel: {fileID: 4300000, guid: 4b66e8f5580378f44a4d53ea7e932687, type: 3}
-  generatorMaterial: {fileID: 2100000, guid: d19a8dade97bfab4984d604d7fbff310, type: 2}
-  wallModel: {fileID: 4300000, guid: 8233ff42909e3ed46b21397b6db0f445, type: 3}
-  wallMaterial: {fileID: 2100000, guid: fab9257c9d3b8ee49acbcfa34ed0a1a8, type: 2}
-  baseModel: {fileID: 4300000, guid: 463263aa79fb3674d961290bcc0c80da, type: 3}
-  baseMaterial: {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
-  buildingCost: 1000
-  generatorCost: 400
-  wallCost: 100
-  fire: {fileID: 400000, guid: 948753746becca5489aa971568228665, type: 2}
-  explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
-  smallexplosion: {fileID: 400000, guid: 633e763395b4e034e91ee3bae665aa08, type: 2}
-  generatorRunning: {fileID: 400000, guid: 4097a2c0f58b52944aea82f849eb58ce, type: 2}
+  BuildingModel: {fileID: 4300000, guid: e575cedddba8db94aa39295681c6048c, type: 3}
+  BuildingMaterial: {fileID: 2100000, guid: 1adfabffbfb9fec43856f2a3bc79cb09, type: 2}
+  GeneratorModel: {fileID: 4300000, guid: 4b66e8f5580378f44a4d53ea7e932687, type: 3}
+  GeneratorMaterial: {fileID: 2100000, guid: 11e8be9a0d2f44047993ecf3e3e93e1c, type: 2}
+  WallModel: {fileID: 4300000, guid: 8233ff42909e3ed46b21397b6db0f445, type: 3}
+  WallMaterial: {fileID: 2100000, guid: fab9257c9d3b8ee49acbcfa34ed0a1a8, type: 2}
+  BaseModel: {fileID: 4300000, guid: 463263aa79fb3674d961290bcc0c80da, type: 3}
+  BaseMaterial: {fileID: 2100000, guid: 34896ed9a752fc4429631a3c77ce693d, type: 2}
+  BuildingCost: 1000
+  GeneratorCost: 400
+  WallCost: 100
+  Fire: {fileID: 400000, guid: 948753746becca5489aa971568228665, type: 2}
+  Explosion: {fileID: 400000, guid: db897609e634d104d8819afc74059de2, type: 2}
+  SmallExplosion: {fileID: 400000, guid: 633e763395b4e034e91ee3bae665aa08, type: 2}
+  GeneratorRunning: {fileID: 400000, guid: 4097a2c0f58b52944aea82f849eb58ce, type: 2}
   Health: 15
 --- !u!114 &11400008
 MonoBehaviour:
@@ -339,9 +335,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
-  _originalcolor: {r: 1, g: .600000024, b: 0, a: 0}
-  _topcolor: {r: 1, g: .944218874, b: .191176474, a: 1}
-  FadeAmount: 1.79999995
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -354,9 +347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 1
-  _originalcolor: {r: 1, g: 1, b: 1, a: 0}
-  _topcolor: {r: 1, g: 1, b: 1, a: 1}
-  FadeAmount: 0
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,9 +359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotated: 0
-  _originalcolor: {r: 0, g: 0, b: 0, a: 0}
-  _topcolor: {r: 1, g: 1, b: 1, a: 1}
-  FadeAmount: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

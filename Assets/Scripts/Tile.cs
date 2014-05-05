@@ -3,10 +3,10 @@ using System.Collections;
 
 public class Tile : MonoBehaviour
 {
-    public int _x { get; private set; }
-    public int _y { get; private set; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
     private GameObject _level { get; set; }
-    public int maxdepositallowed = 3;
+    private int _maxdepositallowed = 3;
 
     public void SetHighlightHeight()
     {
@@ -98,8 +98,8 @@ public class Tile : MonoBehaviour
 
     public void InitializeLevelData(int x, int y, GameObject level)
     {
-        _x = x;
-        _y = y;
+        X = x;
+        Y = y;
         _level = level;
     }
 
@@ -109,19 +109,19 @@ public class Tile : MonoBehaviour
     {
         if (LavaHeight == 0) return;
 
-        if (_y == 0)
+        if (Y == 0)
         {
-            LavaHeight -= maxdepositallowed;
+            LavaHeight -= _maxdepositallowed;
             return;
         }
 
-        Tile bottom = _level.GetComponent<Level>()._tiles[_x][_y - 1].GetComponent<Tile>();
-        int rightx = Mathf.Min(_x + 1, Level.LevelWidth - 1);
-        int leftx = Mathf.Max(_x - 1, 0);
-        Tile bottomright = _level.GetComponent<Level>()._tiles[rightx][_y - 1].GetComponent<Tile>();
-        Tile bottomleft = _level.GetComponent<Level>()._tiles[leftx][_y - 1].GetComponent<Tile>();
-        Tile right = _level.GetComponent<Level>()._tiles[rightx][_y].GetComponent<Tile>();
-        Tile left = _level.GetComponent<Level>()._tiles[leftx][_y].GetComponent<Tile>();
+        Tile bottom = _level.GetComponent<Level>()._tiles[X][Y - 1].GetComponent<Tile>();
+        int rightx = Mathf.Min(X + 1, State.level.LevelWidth - 1);
+        int leftx = Mathf.Max(X - 1, 0);
+        Tile bottomright = _level.GetComponent<Level>()._tiles[rightx][Y - 1].GetComponent<Tile>();
+        Tile bottomleft = _level.GetComponent<Level>()._tiles[leftx][Y - 1].GetComponent<Tile>();
+        Tile right = _level.GetComponent<Level>()._tiles[rightx][Y].GetComponent<Tile>();
+        Tile left = _level.GetComponent<Level>()._tiles[leftx][Y].GetComponent<Tile>();
 
         if (bottom.HasWall || bottom.HasBase)
         {
@@ -129,7 +129,7 @@ public class Tile : MonoBehaviour
         }
 
         int deposited = 0;
-        while (LavaHeight > 0 && deposited < maxdepositallowed)
+        while (LavaHeight > 0 && deposited < _maxdepositallowed)
         {
             int depositedstart = deposited;
             if (TileOkay(bottom, -1))
@@ -138,28 +138,28 @@ public class Tile : MonoBehaviour
                 bottom.LavaHeight += 1;
                 deposited++;
             }
-            if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+            if (!(LavaHeight > 0 && deposited < _maxdepositallowed)) break;
             if (TileOkay(bottomright, 1) && TileOkay(right, 1))
             {
                 LavaHeight -= 1;
                 bottomright.LavaHeight += 1;
                 deposited++;
             }
-            if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+            if (!(LavaHeight > 0 && deposited < _maxdepositallowed)) break;
             if (TileOkay(bottomleft, 1) && TileOkay(left, 1))
             {
                 LavaHeight -= 1;
                 bottomleft.LavaHeight += 1;
                 deposited++;
             }
-            if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+            if (!(LavaHeight > 0 && deposited < _maxdepositallowed)) break;
             if (TileOkay(right, 1))
             {
                 LavaHeight -= 1;
                 right.LavaHeight += 1;
                 deposited++;
             }
-            if (!(LavaHeight > 0 && deposited < maxdepositallowed)) break;
+            if (!(LavaHeight > 0 && deposited < _maxdepositallowed)) break;
             if (TileOkay(left, 1))
             {
                 LavaHeight -= 1;

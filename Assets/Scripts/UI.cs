@@ -17,7 +17,7 @@ public class UI : MonoBehaviour
     public Texture2D K3;
     public Texture2D K4;
 
-    public int digCost = 50;
+    public int DigCost = 50;
 
     void Start()
     {
@@ -55,9 +55,9 @@ public class UI : MonoBehaviour
         }
         if (GUI.Button(new Rect(pad, 4 * pad + size * 3, size, size), Dig))
         {
-            if (State.selected.GetComponent<Tile>().LavaHeight == 0 && State.money > digCost)
+            if (State.selected.GetComponent<Tile>().LavaHeight == 0 && State.money > DigCost)
             {
-                State.money -= digCost;
+                State.money -= DigCost;
                 State.selected.GetComponent<Tile>().GroundHeight -= 3;
             }
         }
@@ -100,9 +100,9 @@ public class UI : MonoBehaviour
         }
         if (Input.GetButtonDown("K4"))
         {
-            if (State.selected.GetComponent<Tile>().LavaHeight == 0 && State.money > digCost)
+            if (State.selected.GetComponent<Tile>().LavaHeight == 0 && State.money > DigCost)
             {
-                State.money -= digCost;
+                State.money -= DigCost;
                 State.selected.GetComponent<Tile>().GroundHeight -= 3;
             }
         }
@@ -131,7 +131,7 @@ public class UI : MonoBehaviour
                     State.selected.GetComponent<Tile>().highlighted = false;
                     State.selected = hit.collider.transform.parent.gameObject;
                     State.selected.GetComponent<Tile>().highlighted = true;
-                    GetComponent<CameraController>().velocity = 0f;
+                    GetComponent<CameraController>().Velocity = 0f;
                 }
             }
         }

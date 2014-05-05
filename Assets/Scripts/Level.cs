@@ -5,35 +5,30 @@ public class Level : MonoBehaviour {
 
     public GameObject TileTemplate;
     public GameObject FlowController;
-    public int Width = 25;
-    public int Height = 15;
+    public int LevelWidth = 25;
+    public int LevelHeight = 15;
     public float volcanoheight = 25;
     public float volcanoradius = 20;
     public float volcanotopradius = 5;
-    public GameObject[][] _tiles;
-
-    public static int LevelWidth = 25; // note: change these too!
-    public static int LevelHeight = 20;
     public float MoneyPerUpdate = 4f;
+    public GameObject[][] _tiles { get; private set; }
 
 	void Start ()
     {
         State.level = this;
-        LevelWidth = Width;
-        LevelHeight = Height;
-        _tiles = new GameObject[Width][];
-        for (int x = 0; x < Width; x++)
+        _tiles = new GameObject[LevelWidth][];
+        for (int x = 0; x < LevelWidth; x++)
         {
-            _tiles[x] = new GameObject[Height];
+            _tiles[x] = new GameObject[LevelHeight];
         }
         float tiley = 0;
         float radius = volcanoradius;
         // slices of the cone
-        for (int y = 0; y < Height; y++)
+        for (int y = 0; y < LevelHeight; y++)
         {
-            float scalar = 2 * radius * Mathf.Tan(Mathf.PI / (float)Width) * 1.2f;
+            float scalar = 2 * radius * Mathf.Tan(Mathf.PI / (float)LevelWidth) * 1.2f;
             // create each tile of the slice
-            for (int x = 0; x < Width; x++)
+            for (int x = 0; x < LevelWidth; x++)
             {
                 GameObject tile = (GameObject)Instantiate(TileTemplate);
                 tile.name = (x.ToString() + "," + y);
@@ -41,7 +36,7 @@ public class Level : MonoBehaviour {
                 tile.gameObject.transform.parent = gameObject.transform;
                 _tiles[x][y] = tile;
 
-                float theta = (Mathf.PI * 2f / (float)Width) * x;
+                float theta = (Mathf.PI * 2f / (float)LevelWidth) * x;
                 tile.transform.position = new Vector3(Mathf.Cos(theta) * radius, tiley, Mathf.Sin(theta) * radius);
                 tile.transform.localScale *= scalar;
                 tile.transform.Rotate(tile.transform.position - (tile.transform.position + new Vector3(0, 0, 1)),
@@ -50,7 +45,7 @@ public class Level : MonoBehaviour {
                     RadiansToDegrees(theta), Space.World);
             }
             scalar *= 1.01f; // squishes them together
-            tiley += (volcanoheight / Height) * scalar / 2;
+            tiley += (volcanoheight / LevelHeight) * scalar / 2;
             radius = (volcanoradius - tiley * (volcanoradius / volcanoheight) * 0.47f);
         }
 
@@ -60,14 +55,15 @@ public class Level : MonoBehaviour {
     IEnumerator RandomizeGround()
     {
         yield return new WaitForFixedUpdate();
-        for (int i = 0; i < Width; i++)
+        float seed = Random.value;
+        for (int i = 0; i < LevelWidth; i++)
         {
-            for (int j = 0; j < Height; j++)
+            for (int j = 0; j < LevelHeight; j++)
             {
                 //_tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range(0, (int)(DynamicHeight.MaxHeight * 0.7f));
                 //_tiles[i][j].GetComponent<Tile>().GroundHeight = Random.Range((int)(DynamicHeight.MaxHeight * 0.2f), (int)(DynamicHeight.MaxHeight * 0.6f));
-                _tiles[i][j].GetComponent<Tile>().GroundHeight = (int)(0f * DynamicHeight.MaxHeight) + 
-                    (int)(Mathf.PerlinNoise((float)j / Width * 7f, (float)i / Height * 7f) * (float)DynamicHeight.MaxHeight * 0.9f);
+                _tiles[i][j].GetComponent<Tile>().GroundHeight = (int)(0f * DynamicHeight.MaxHeight) +
+                    (int)(Mathf.PerlinNoise(((float)j / LevelWidth + seed) * 7f, ((float)i / LevelHeight + seed) * 7f) * (float)DynamicHeight.MaxHeight * 0.9f);
                 _tiles[i][j].GetComponent<Tile>().LavaHeight = 0;
                 _tiles[i][j].GetComponent<Tile>().SetHighlightHeight();
             }
