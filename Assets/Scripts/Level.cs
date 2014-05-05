@@ -18,6 +18,7 @@ public class Level : MonoBehaviour {
 
 	void Start ()
     {
+        State.level = this;
         LevelWidth = Width;
         LevelHeight = Height;
         _tiles = new GameObject[Width][];

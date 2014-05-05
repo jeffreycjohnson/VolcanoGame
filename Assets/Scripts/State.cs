@@ -5,4 +5,5 @@ public class State {
 	public static Vector2 selectedGrid = new Vector2(0, 0);
 	public static bool defeated = false;
 	public static GameObject selected;
+    public static Level level;
 }

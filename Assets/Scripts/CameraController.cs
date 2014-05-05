@@ -10,11 +10,11 @@ public class CameraController : MonoBehaviour {
 
 	void Update () {
 		if(velocity - friction > 0) {
-			velocity -= friction;
+			velocity -= friction * Time.deltaTime * 60;
 			velocity = System.Math.Min(velocity, maxSpeed);
 		}
 		else if(velocity + friction < 0) {
-			velocity += friction;
+            velocity += friction * Time.deltaTime * 60;
 			velocity = System.Math.Max(velocity, -maxSpeed);
 		}
 		if(!started) {

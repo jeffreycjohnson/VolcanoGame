@@ -19,6 +19,8 @@ public class FlowController : MonoBehaviour {
     bool[][] _hadlava;
     private int _difficulty = 15;
 
+    public Transform erruption;
+
 	void Start ()
     {
         _flowdelta = Random.Range(MinFlowDelta, MaxFlowDelta);
@@ -67,12 +69,13 @@ public class FlowController : MonoBehaviour {
             {
                 _flowcount = 0;
                 _flowtime = Random.Range(MinFlowTime, MaxFlowTime);
-				_lavasource.Clear();
+                _lavasource.Clear();
+                State.level.transform.FindChild("Eruption").particleSystem.Stop();
                 for (int i = 0; i <= (_difficulty - 10) / 10; i++)
                 {
                     NewStream();
                 }
-                if(Random.Range(0, _difficulty) >= 15)
+                if(Random.Range(0, _difficulty) >= 1)
                 {
                     NewStream(Random.Range(0, Level.LevelHeight - 1));
                 }
@@ -91,6 +94,7 @@ public class FlowController : MonoBehaviour {
 			{
 				NewStream();
 			}
+            State.level.transform.FindChild("Eruption").particleSystem.Play();
             _difficulty++;
 		}
 	}
@@ -101,6 +105,7 @@ public class FlowController : MonoBehaviour {
         // todo: make this random distribution more uniform. most important RNG.
         // TODO TODO TODO
         GameObject tile = _level.GetComponent<Level>()._tiles[Random.Range(0, Level.LevelWidth - 1)][height];
+        Destroy(Instantiate(erruption.gameObject, tile.transform.FindChild("Structure").position, tile.transform.FindChild("Structure").rotation), _flowtime);
         tile.GetComponent<Tile>().GroundHeight = 2;
         tile.GetComponent<Tile>().LavaHeight = FlowHeightPerTick;
         _lavasource.Add(tile);
